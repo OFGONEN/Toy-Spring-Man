@@ -30,6 +30,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-basement:17.5.0@aar' // Assets/Elephant/Editor/ElephantDependencies.xml:6
     implementation 'com.parse.bolts:bolts-android:1.4.0' // Assets/FacebookSDK/Plugins/Editor/Dependencies.xml:4
 // Android Resolver Dependencies End
+    implementation 'com.android.support:multidex:1.0.3'
 **DEPS**}
 
 // Android Resolver Exclusions Start
@@ -45,7 +46,7 @@ android {
 }
 // Android Resolver Exclusions End
 android {
-    compileSdkVersion **APIVERSION**
+    compileSdkVersion 31
     buildToolsVersion '**BUILDTOOLS**'
 
     compileOptions {
@@ -62,6 +63,7 @@ android {
         versionCode **VERSIONCODE**
         versionName '**VERSIONNAME**'
         consumerProguardFiles 'proguard-unity.txt'**USER_PROGUARD**
+        multiDexEnabled true
     }
 
     lintOptions {

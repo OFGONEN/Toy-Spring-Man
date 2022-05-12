@@ -5,7 +5,7 @@ dependencies {
     }
 
 android {
-    compileSdkVersion **APIVERSION**
+    compileSdkVersion 31
     buildToolsVersion '**BUILDTOOLS**'
 
     compileOptions {
@@ -22,6 +22,7 @@ android {
         }
         versionCode **VERSIONCODE**
         versionName '**VERSIONNAME**'
+        multiDexEnabled true
     }
 
     aaptOptions {
