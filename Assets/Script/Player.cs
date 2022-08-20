@@ -26,6 +26,11 @@ public class Player : MonoBehaviour
 		onUpdateMethod = ExtensionMethods.EmptyMethod;
 	}
 
+    private void Start()
+    {
+		OnLevelStart();
+	}
+
     private void Update()
     {
 		onUpdateMethod();
@@ -43,7 +48,13 @@ public class Player : MonoBehaviour
     void Movement()
     {
 		var position = transform.position;
-		position.x += shared_input_drag.sharedValue.x * GameSettings.Instance.player_movement_speed_lateral;
+
+		position.x = Mathf.Clamp(
+			position.x + shared_input_drag.sharedValue.x * GameSettings.Instance.player_movement_speed_lateral,
+			-GameSettings.Instance.player_movement_clamp_lateral,
+			GameSettings.Instance.player_movement_clamp_lateral
+		);
+
 		position.z += GameSettings.Instance.player_movement_speed_forward * Time.deltaTime;
 
 		transform.position = position;
