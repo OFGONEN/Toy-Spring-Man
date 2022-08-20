@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FFStudio;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 
 public class Player : MonoBehaviour
@@ -11,6 +12,10 @@ public class Player : MonoBehaviour
 #region Fields
   [ Title( "Shared Variables" ) ]
     [ SerializeField ] SharedVector2 shared_input_drag;
+    [ SerializeField ] SharedVector3 shared_levelEnd_position;
+
+// Private
+    RecycledSequence recycledSequence = new RecycledSequence();
 
 
 // Delegates
@@ -26,10 +31,10 @@ public class Player : MonoBehaviour
 		onUpdateMethod = ExtensionMethods.EmptyMethod;
 	}
 
-    private void Start()
-    {
-		OnLevelStart();
-	}
+    // private void Start()
+    // {
+	// 	OnLevelStart();
+	// }
 
     private void Update()
     {
@@ -41,6 +46,17 @@ public class Player : MonoBehaviour
     public void OnLevelStart()
     {
 		onUpdateMethod = Movement;
+	}
+
+    public void OnFinishLineReached()
+    {
+		onUpdateMethod = ExtensionMethods.EmptyMethod;
+
+		// Level End Sequence
+		var sequence = recycledSequence.Recycle( OnEndLevelReached );
+
+		sequence.Append( transform.DOMove( shared_levelEnd_position.sharedValue, 1 ) );
+		sequence.Join( transform.DORotate( Vector3.zero, 1 ) );
 	}
 #endregion
 
@@ -62,6 +78,10 @@ public class Player : MonoBehaviour
 		//Info: Since LeanTouch executive order is before default time, We can default an input value every frame after use
 		shared_input_drag.sharedValue = Vector2.zero;
 	}
+
+    void OnEndLevelReached()
+    {
+    }
 #endregion
 
 #region Editor Only
