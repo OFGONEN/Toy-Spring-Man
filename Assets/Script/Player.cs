@@ -31,11 +31,6 @@ public class Player : MonoBehaviour
 		onUpdateMethod = ExtensionMethods.EmptyMethod;
 	}
 
-    // private void Start()
-    // {
-	// 	OnLevelStart();
-	// }
-
     private void Update()
     {
 		onUpdateMethod();

@@ -15,7 +15,9 @@ MonoBehaviour:
   player_movement_speed_forward: 0
   player_movement_speed_lateral: 0.1
   player_movement_clamp_lateral: 1
-  camera_follow_speed_depth: 2.8
+  camera_follow_speed: 1
+  camera_follow_offset_start: {x: 2, y: 2, z: -10}
+  camera_follow_offset_end: {x: 2, y: 4, z: -12}
   maxLevelCount: 1
   useRemoteConfig_GameSettings: 0
   useRemoteConfig_Components: 0
