@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: game_settings
   m_EditorClassIdentifier: 
   player_movement_speed_forward: 0
-  player_movement_speed_lateral: 10
+  player_movement_speed_lateral: 0.1
+  player_movement_clamp_lateral: 1
   camera_follow_speed_depth: 2.8
   maxLevelCount: 1
   useRemoteConfig_GameSettings: 0

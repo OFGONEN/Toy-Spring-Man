@@ -14,6 +14,7 @@ namespace FFStudio
     [ Title( "Player" ) ]
         [ LabelText( "Player Movement Speed Forward" ) ] public float player_movement_speed_forward;
         [ LabelText( "Player Movement Speed Lateral" ) ] public float player_movement_speed_lateral;
+        [ LabelText( "Player Movement Clamp Lateral" ) ] public float player_movement_clamp_lateral;
     
     [ Title( "Camera" ) ]
         [ LabelText( "Follow Speed (Z)" ), SuffixLabel( "units/seconds" ), Min( 0 ) ] public float camera_follow_speed_depth = 2.8f;
