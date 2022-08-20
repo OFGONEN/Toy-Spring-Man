@@ -4,10 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FFStudio;
+using Sirenix.OdinInspector;
 
 public class ColorGate : MonoBehaviour
 {
 #region Fields
+  [ Title( "Setup" ) ]
     [ SerializeField ] ColorData data_color; 
     [ SerializeField ] ColorData data_color_player; 
 #endregion
