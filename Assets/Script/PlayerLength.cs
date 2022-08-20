@@ -16,6 +16,6 @@ public class PlayerLength : SharedIntNotifier
 
     public void Substact( int value )
     {
-		SharedValue = Mathf.Max( 0, sharedValue - value );
+		SharedValue -= value;
 	}
 }
