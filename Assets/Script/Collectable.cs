@@ -15,7 +15,8 @@ public class Collectable : MonoBehaviour
 
   [ Title( "Shared Variable" ) ]
     [ SerializeField ] ColorData data_color_player; 
-    [ SerializeField ] PlayerLength property_player_length; 
+    [ SerializeField ] IntGameEvent event_player_length_gained; 
+    [ SerializeField ] IntGameEvent event_player_length_lost; 
 #endregion
 
 #region Properties
@@ -28,9 +29,9 @@ public class Collectable : MonoBehaviour
     public void OnTrigger()
     {
         if( data_color.ColorID == data_color_player.ColorID )
-			property_player_length.Add( data_value );
-        else
-			property_player_length.Substact( data_value );
+			event_player_length_gained.Raise( data_value );
+		else
+			event_player_length_lost.Raise( data_value );
 	}
 #endregion
 
