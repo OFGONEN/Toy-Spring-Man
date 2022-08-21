@@ -17,47 +17,73 @@ public class TestMovementSpring : MonoBehaviour
     [ SerializeField ] float scaleValue;
 	[ SerializeField ] float followSpeed;
 
-    Vector3[] lastPositions;
+    Vector3 lastPosition;
 #endregion
 
 #region Properties
     private void Start()
     {
-		lastPositions = new Vector3[ springs.Length ];
+		lastPosition = transform.position;
         
-		for( var i = 0; i < springs.Length; i++ )
-			lastPositions[ i ] = springs[ i ].position;
-
 		springValue.sharedValue = 0;
 	}
 #endregion
 
 #region Unity API
-    private void Foo()
-    {
-		var position = transform.position;
+    // private void Foo()
+    // {
+	// 	var position = transform.position;
 
-		for( var i = 0; i < springs.Length; i++ )
-        {
-			var spring = springs[ i ];
+	// 	for( var i = 0; i < springs.Length; i++ )
+    //     {
+	// 		var spring = springs[ i ];
 
-			var scaleChange = springValue.sharedValue * scaleValue;
-			var positionY = position.y + i * offset_vertical + offset_vertical * scaleChange * i;
+	// 		var scaleChange = springValue.sharedValue * scaleValue;
+	// 		var positionY = position.y + i * offset_vertical + offset_vertical * scaleChange * i;
 
-            var offsetHorizontal = (float) i / springs.Length * offset_horizontal;
-			var positionX = lastPositions[ i ].x;
+    //         var offsetHorizontal = (float) i / springs.Length * offset_horizontal;
+	// 		var positionX = lastPosition[ i ].x;
 
-			var sign = position.x - positionX;
-			positionX = position.x + sign * Mathf.Min( offsetHorizontal, Mathf.Abs( position.x - positionX ) );
-			positionX = Mathf.Lerp( positionX, position.x, followSpeed * Time.deltaTime );
+	// 		var sign = position.x - positionX;
+	// 		positionX = position.x + sign * Mathf.Min( offsetHorizontal, Mathf.Abs( position.x - positionX ) );
+	// 		positionX = Mathf.Lerp( positionX, position.x, followSpeed * Time.deltaTime );
 
-			spring.localScale    = new Vector3( 1, 1 + scaleChange , 1 );
-			spring.position = Vector3.up * positionY + Vector3.right * positionX;
-		}
+	// 		spring.localScale    = new Vector3( 1, 1 + scaleChange , 1 );
+	// 		spring.position = Vector3.up * positionY + Vector3.right * positionX;
+	// 	}
 
-		for( var i = 0; i < springs.Length; i++ )
-			lastPositions[ i ] = springs[ i ].position;
-    }
+	// 	for( var i = 0; i < springs.Length; i++ )
+	// 		lastPositions[ i ] = springs[ i ].position;
+    // }
+
+    // private void Foo2()
+    // {
+	// 	var parentPosition = transform.position;
+
+	// 	for( var i = 0; i < springs.Length; i++ )
+    //     {
+	// 		var currentPosition = springs[ i ].position;
+	// 		var lastPosition = this.lastPosition[ i ];
+
+	// 		var scaleChange = springValue.sharedValue * scaleValue;
+	// 		var offset = ( float )i / springs.Length * offset_horizontal;
+
+	// 		var distance = parentPosition.x - lastPosition.x;
+	// 		var sign = Mathf.Sign( distance );
+	// 		offset = Mathf.Min( offset_horizontal, Mathf.Abs( distance ) ) * sign;
+
+	// 		var positionHorizontal = parentPosition.x + offset;
+	// 		// positionHorizontal = Mathf.Lerp( positionHorizontal, parentPosition.x, followSpeed * Time.deltaTime );
+
+	// 		var position_Vertical = parentPosition.y + i * offset_vertical + offset_vertical * scaleChange * i;
+
+	// 		springs[ i ].position = Vector3.up * position_Vertical + Vector3.right * positionHorizontal;
+	// 		springs[ i ].localScale = Vector3.one.SetY( 1 + scaleChange );
+	// 	}
+
+		// for( var i = 0; i < springs.Length; i++ )
+			// lastPositions[ i ] = springs[ i ].position;
+	// }
 
     private void Update()
     {
@@ -65,27 +91,22 @@ public class TestMovementSpring : MonoBehaviour
 
 		for( var i = 0; i < springs.Length; i++ )
         {
-			var currentPosition = springs[ i ].position;
-			var lastPosition = lastPositions[ i ];
-
+			var spring = springs[ i ];
 			var scaleChange = springValue.sharedValue * scaleValue;
 			var offset = ( float )i / springs.Length * offset_horizontal;
 
-			var distance = parentPosition.x - lastPosition.x;
-			var sign = Mathf.Sign( distance );
-			offset = Mathf.Min( offset_horizontal, Mathf.Abs( distance ) ) * sign;
+			var distace = lastPosition.x - parentPosition.x;
 
-			var positionHorizontal = parentPosition.x + offset;
-			// positionHorizontal = Mathf.Lerp( positionHorizontal, parentPosition.x, followSpeed * Time.deltaTime );
+			var positionHorizontal = Mathf.Clamp( distace, -offset, offset );
+			positionHorizontal = Mathf.Lerp( positionHorizontal, 0, followSpeed * Time.deltaTime );
 
-			var position_Vertical = parentPosition.y + i * offset_vertical + offset_vertical * scaleChange * i;
+			var positionVertical = i * offset_vertical + offset_vertical * scaleChange * i;
 
-			springs[ i ].position = Vector3.up * position_Vertical + Vector3.right * positionHorizontal;
-			springs[ i ].localScale = Vector3.one.SetY( 1 + scaleChange );
-		}
+			spring.localPosition = Vector3.up * positionVertical + Vector3.right * positionHorizontal;
+			spring.localScale = Vector3.one.SetY( 1 + scaleChange );
+        }
 
-		for( var i = 0; i < springs.Length; i++ )
-			lastPositions[ i ] = springs[ i ].position;
+		lastPosition = transform.position;
 	}
 #endregion
 
