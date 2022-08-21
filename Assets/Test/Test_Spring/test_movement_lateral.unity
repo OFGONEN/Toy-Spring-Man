@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2063631548}
-  followSpeed: 1
+  followSpeed: 10
   maxOffSet: 0.2
 --- !u!1 &978308928
 GameObject:
@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 67903973}
-  followSpeed: 1
+  followSpeed: 10
   maxOffSet: 0.3
 --- !u!23 &978308931
 MeshRenderer:
@@ -353,7 +353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1713761641}
-  followSpeed: 1
+  followSpeed: 10
   maxOffSet: 0.5
 --- !u!23 &1181093003
 MeshRenderer:
@@ -467,7 +467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 978308929}
-  followSpeed: 1
+  followSpeed: 10
   maxOffSet: 0.4
 --- !u!23 &1713761643
 MeshRenderer:
