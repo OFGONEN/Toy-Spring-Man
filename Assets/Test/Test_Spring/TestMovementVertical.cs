@@ -7,7 +7,7 @@ using FFStudio;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 
-public class TestMovementSpring : MonoBehaviour
+public class TestMovementVertical : MonoBehaviour
 {
 #region Fields
     [ SerializeField ] SharedFloat springValue;
