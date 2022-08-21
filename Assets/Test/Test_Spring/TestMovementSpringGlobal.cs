@@ -18,6 +18,8 @@ public class TestMovementSpringGlobal : MonoBehaviour
     [ SerializeField ] float offset_horizontal;
     [ SerializeField ] float scaleValue;
 	[ SerializeField ] float followSpeed;
+
+    Vector3 punch;
 #endregion
 
 #region Properties
@@ -55,6 +57,13 @@ public class TestMovementSpringGlobal : MonoBehaviour
 
 #region Implementation
     [ Button() ]
+    public void DoPunch()
+    {
+		punch = Vector3.one * springValue.sharedValue;
+		DOTween.Punch( GetPunchValue, SetPunchValue, Vector3.up, 0.75f ).OnUpdate( OnPunchUpdate );
+	}
+
+    [ Button() ]
     public void DoSpringTweenNegative()
     {
 		DOTween.To( GetSpringValue, SetSpringValue, -1, 0.5f ).OnComplete( DoSpringTweenPositive );
@@ -74,6 +83,21 @@ public class TestMovementSpringGlobal : MonoBehaviour
     void SetSpringValue( float value )
     {
 		springValue.sharedValue = value;
+	}
+
+    void OnPunchUpdate()
+    {
+		springValue.sharedValue = punch.y;
+	}
+
+    Vector3 GetPunchValue()
+    {
+		return punch;
+	}
+
+    void SetPunchValue( Vector3 value )
+    {
+		punch = value;
 	}
 #endregion
 

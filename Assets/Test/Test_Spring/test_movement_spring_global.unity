@@ -204,7 +204,7 @@ MonoBehaviour:
   positionIndex: 1
   springCount: 4
   offset_vertical: 2
-  offset_horizontal: 1
+  offset_horizontal: 3
   scaleValue: 0.25
   followSpeed: 10
 --- !u!1 &946093092
@@ -624,7 +624,7 @@ MonoBehaviour:
   positionIndex: 0
   springCount: 4
   offset_vertical: 2
-  offset_horizontal: 1
+  offset_horizontal: 3
   scaleValue: 0.25
   followSpeed: 10
 --- !u!1 &1986558004
@@ -677,7 +677,7 @@ MonoBehaviour:
   positionIndex: 2
   springCount: 4
   offset_vertical: 2
-  offset_horizontal: 1
+  offset_horizontal: 3
   scaleValue: 0.25
   followSpeed: 10
 --- !u!1 &2005158217
@@ -813,6 +813,6 @@ MonoBehaviour:
   positionIndex: 3
   springCount: 4
   offset_vertical: 2
-  offset_horizontal: 1
+  offset_horizontal: 3
   scaleValue: 0.25
   followSpeed: 10
