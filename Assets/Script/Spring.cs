@@ -69,6 +69,21 @@ public class Spring : MonoBehaviour
 #endregion
 
 #region Implementation
+	void OnUpdate()
+	{
+		var scaleChange = shared_spring_value.sharedValue * GameSettings.Instance.spring_offset_scale.ReturnProgress( notif_player_width.Ratio );
+		transform.localScale = Vector3.one.SetY( 1 + scaleChange );
+
+		var playerPosition = player_transform.position;
+
+		var offsetHorizontal = GameSettings.Instance.spring_offset_horizontal.ReturnProgress( notif_player_width.Ratio );
+		    offsetHorizontal = Mathf.Clamp( transform.position.x - playerPosition.x, -offsetHorizontal, offsetHorizontal );
+		    offsetHorizontal = Mathf.Lerp( offsetHorizontal, 0, GameSettings.Instance.spring_speed_lateral );
+
+		var offsetVertical = ( GameSettings.Instance.spring_offset_vertical * index + GameSettings.Instance.spring_offset_vertical * scaleChange * index );
+
+		transform.position = playerPosition + offsetVertical * Vector3.up + offsetHorizontal * Vector3.right;
+	}
 #endregion
 
 #region Editor Only
