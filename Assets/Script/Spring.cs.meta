@@ -3,7 +3,13 @@ guid: fb17498c3d7bf43c78da455737362c95
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - shared_spring_value: {fileID: 11400000, guid: 7aa689c2e18ab412cb9d59ea5c1e7211, type: 2}
+  - notif_player_width: {fileID: 11400000, guid: ffb2a4d415c4043909960d310f0a9286, type: 2}
+  - notif_player_transform: {fileID: 11400000, guid: 8ec4b4aa73cbe412890f58b61d9c878b, type: 2}
+  - pool_spring: {fileID: 11400000, guid: aa95d39e4dfb843b883ebe99acc1bd13, type: 2}
+  - _skinRenderer: {instanceID: 0}
+  - colorSetter: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
