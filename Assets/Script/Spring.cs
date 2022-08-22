@@ -57,6 +57,8 @@ public class Spring : MonoBehaviour
 
 		player_transform   = notif_player_transform.sharedValue as Transform;
 		transform.position = spawnPosition + Vector3.up * GameSettings.Instance.spring_offset_vertical * ( 1 + scaleChange * index );
+
+		onUpdateMethod = OnUpdate;
 	}
 
     public void OnColorChange( Color color )
