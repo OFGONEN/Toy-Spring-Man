@@ -41,8 +41,8 @@ public class Player : MonoBehaviour
     {
 		onUpdateMethod = ExtensionMethods.EmptyMethod;
 
-		tightSpring_upper_renderer.enabled  = false;
-		tightSpring_bottom_renderer.enabled = false;
+		// tightSpring_upper_renderer.enabled  = false;
+		// tightSpring_bottom_renderer.enabled = false;
 	}
 
     private void Update()
@@ -56,11 +56,11 @@ public class Player : MonoBehaviour
     {
 		onUpdateMethod = Movement;
 
-		body_upper_animator.SetTrigger( "run" );
-		body_bottom_animator.SetTrigger( "run" );
+		// body_upper_animator.SetTrigger( "run" );
+		// body_bottom_animator.SetTrigger( "run" );
 
-		tightSpring_upper_renderer.enabled  = true;
-		tightSpring_bottom_renderer.enabled = true;
+		// tightSpring_upper_renderer.enabled  = true;
+		// tightSpring_bottom_renderer.enabled = true;
 	}
 
     public void OnFinishLineReached()
@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
 		shared_player_length.SharedValue = spring_list.Count;
 	}
 
-	public void OnPlayerLength_Lost( int index )
+	public void OnPlayerLength_Lost( IntGameEvent gameEvent )
 	{
 	}
 #endregion
