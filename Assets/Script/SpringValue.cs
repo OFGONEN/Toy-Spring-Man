@@ -32,8 +32,9 @@ public class SpringValue : SharedFloat
     [ Button() ]
     public void DoPunch()
     {
+		sharedValue = 0;
 		punch = Vector3.one * sharedValue;
-		DOTween.Punch( GetPunchValue, SetPunchValue, Vector3.up, 0.75f ).OnUpdate( OnPunchUpdate );
+		DOTween.Punch( GetPunchValue, SetPunchValue, Vector3.up, 2 ).OnUpdate( OnPunchUpdate );
 	}
 
 	void OnPunchUpdate()
