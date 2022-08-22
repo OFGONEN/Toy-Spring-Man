@@ -9,9 +9,22 @@ using Sirenix.OdinInspector;
 public class Spring : MonoBehaviour
 {
 #region Fields
+  [ Title( "Shared Variables" ) ]
+	[ SerializeField ] SharedFloat shared_spring_value; // ( -1, +1 )
+	[ SerializeField ] PlayerWidth notif_player_width;
+	[ SerializeField ] SharedReferenceNotifier notif_player_transform;
+	[ SerializeField ] PoolSpring pool_spring;
+
   [ Title( "Components" ) ]
     [ SerializeField ] SkinnedMeshRenderer _skinRenderer;
     [ SerializeField ] ColorSetter colorSetter;
+
+// Private
+	Transform player_transform;
+	int index;
+
+// Delegates
+	UnityMessage onUpdateMethod;
 #endregion
 
 #region Properties
