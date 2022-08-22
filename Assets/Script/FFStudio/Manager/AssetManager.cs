@@ -12,9 +12,9 @@ namespace FFStudio
 	{
 #region Fields
 	[ Title( "UnityEvent" ) ]
-	[ SerializeField ] UnityEvent onAwakeEvent;
-	[ SerializeField ] UnityEvent onEnableEvent;
-	[ SerializeField ] UnityEvent onStartEvent;
+		[ SerializeField ] UnityEvent onAwakeEvent;
+		[ SerializeField ] UnityEvent onEnableEvent;
+		[ SerializeField ] UnityEvent onStartEvent;
 
 	[ Title( "Setup" ) ]
 		[ SerializeField ] GameSettings gameSettings;
@@ -22,6 +22,7 @@ namespace FFStudio
 
 	[ Title( "Pool" ) ]
 		[ SerializeField ] Pool_UIPopUpText pool_UIPopUpText;
+		[ SerializeField ] PoolSpring pool_spring;
 #endregion
 
 #region UnityAPI
@@ -35,6 +36,8 @@ namespace FFStudio
 			Vibration.Init();
 
 			pool_UIPopUpText.InitPool( transform, false );
+			pool_spring.InitPool( transform, false );
+
 			onAwakeEvent.Invoke();
 		}
 
