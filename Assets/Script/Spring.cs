@@ -31,9 +31,32 @@ public class Spring : MonoBehaviour
 #endregion
 
 #region Unity API
+	private void Awake()
+	{
+		onUpdateMethod = ExtensionMethods.EmptyMethod;
+	}
+
+	private void OnDisable()
+	{
+		onUpdateMethod = ExtensionMethods.EmptyMethod;
+	}
+
+	private void Update()
+	{
+		onUpdateMethod();
+	}
 #endregion
 
 #region API
+	public void Spawn( int index, Vector3 spawnPosition )
+	{
+		var scaleChange = shared_spring_value.sharedValue * GameSettings.Instance.spring_offset_scale.ReturnProgress( notif_player_width.Ratio );
+		transform.localScale = Vector3.one.SetY( 1 + scaleChange );
+
+		player_transform   = notif_player_transform.sharedValue as Transform;
+		transform.position = spawnPosition + Vector3.up * GameSettings.Instance.spring_offset_vertical * ( 1 + scaleChange * index );
+	}
+
     public void OnColorChange( Color color )
     {
 		colorSetter.SetColor( color );
