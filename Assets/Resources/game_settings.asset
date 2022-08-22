@@ -17,7 +17,7 @@ MonoBehaviour:
   player_movement_clamp_lateral: 1
   spring_offset_ground: 2
   spring_offset_vertical: 2
-  spring_offset_horizontal: {x: 0.1, y: 0.025}
+  spring_offset_horizontal: {x: 0.2, y: 0.05}
   spring_offset_scale: {x: 0.2, y: 0.1}
   spring_speed_lateral: 10
   camera_follow_speed: 1
