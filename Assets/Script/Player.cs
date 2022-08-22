@@ -11,9 +11,19 @@ public class Player : MonoBehaviour
 {
 #region Fields
   [ Title( "Shared Variables" ) ]
+    [ SerializeField ] ColorData shared_player_color;
+    [ SerializeField ] PlayerLength shared_player_length;
     [ SerializeField ] SharedVector2 shared_input_drag;
     [ SerializeField ] SharedVector3 shared_levelEnd_position;
 	[ SerializeField ] PoolSpring pool_spring;
+
+  [ Title( "Components" ) ]
+	[ SerializeField ] Renderer tightSpring_upper_renderer;
+	[ SerializeField ] Renderer tightSpring_bottom_renderer;
+	[ SerializeField ] Animator body_upper_animator;
+	[ SerializeField ] Animator body_bottom_animator;
+	[ SerializeField ] ColorSetter body_upper_colorSetter;
+	[ SerializeField ] ColorSetter body_bottom_colorSetter;
 
 // Private
 	List< Spring > spring_list = new List< Spring >( 32 );
