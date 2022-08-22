@@ -80,11 +80,12 @@ public class Spring : MonoBehaviour
 
 		var playerPosition = player_transform.position;
 
-		var offsetHorizontal = GameSettings.Instance.spring_offset_horizontal.ReturnProgress( notif_player_width.Ratio );
+		var offsetHorizontal = GameSettings.Instance.spring_offset_horizontal.ReturnProgress( notif_player_width.Ratio ) * ( spring_index + 1 );
 		    offsetHorizontal = Mathf.Clamp( transform.position.x - playerPosition.x, -offsetHorizontal, offsetHorizontal );
-		    offsetHorizontal = Mathf.Lerp( offsetHorizontal, 0, GameSettings.Instance.spring_speed_lateral );
+		    offsetHorizontal = Mathf.Lerp( offsetHorizontal, 0, GameSettings.Instance.spring_speed_lateral * Time.deltaTime );
 
-		var offsetVertical = ( GameSettings.Instance.spring_offset_vertical * index + GameSettings.Instance.spring_offset_vertical * scaleChange * index );
+		var offsetVertical = ( GameSettings.Instance.spring_offset_vertical * spring_index + GameSettings.Instance.spring_offset_vertical * scaleChange * spring_index );
+		offsetVertical += GameSettings.Instance.spring_offset_ground;
 
 		transform.position = playerPosition + offsetVertical * Vector3.up + offsetHorizontal * Vector3.right;
 	}
