@@ -15,6 +15,13 @@ namespace FFStudio
         [ LabelText( "Player Movement Speed Forward" ) ] public float player_movement_speed_forward;
         [ LabelText( "Player Movement Speed Lateral" ) ] public float player_movement_speed_lateral;
         [ LabelText( "Player Movement Clamp Lateral" ) ] public float player_movement_clamp_lateral;
+
+    [ Title( "Spring" ) ]
+        [ LabelText( "Spring offset from ground" ) ] public float spring_offset_ground;
+        [ LabelText( "Spring offset Vertical" ) ] public float spring_offset_vertical;
+        [ LabelText( "Spring offset Horizontal" ) ] public Vector2 spring_offset_horizontal;
+        [ LabelText( "Spring offset Scale" ) ] public Vector2 spring_offset_scale;
+        [ LabelText( "Spring Speed Lateral" ) ] public float spring_speed_lateral; //todo make it vector2 ?:
     
     [ Title( "Camera" ) ]
         [ LabelText( "Follow Speed" ) ] public float camera_follow_speed;
