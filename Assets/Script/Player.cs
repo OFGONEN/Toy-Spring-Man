@@ -13,11 +13,12 @@ public class Player : MonoBehaviour
   [ Title( "Shared Variables" ) ]
     [ SerializeField ] SharedVector2 shared_input_drag;
     [ SerializeField ] SharedVector3 shared_levelEnd_position;
+	[ SerializeField ] PoolSpring pool_spring;
 
 // Private
+	List< Spring > spring_list = new List< Spring >( 32 );
+
     RecycledSequence recycledSequence = new RecycledSequence();
-
-
 // Delegates
     UnityMessage onUpdateMethod;
 #endregion
@@ -53,6 +54,8 @@ public class Player : MonoBehaviour
 		sequence.Append( transform.DOMove( shared_levelEnd_position.sharedValue, 1 ) );
 		sequence.Join( transform.DORotate( Vector3.zero, 1 ) );
 	}
+
+
 #endregion
 
 #region Implementation
