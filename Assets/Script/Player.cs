@@ -74,7 +74,14 @@ public class Player : MonoBehaviour
 		sequence.Join( transform.DORotate( Vector3.zero, 1 ) );
 	}
 
+	public void OnPlayerColorChange()
+	{
+		foreach( var spring in spring_list )
+			spring.OnColorChange( shared_player_color.Color );
 
+		body_upper_colorSetter.SetColor( shared_player_color.Color );
+		body_bottom_colorSetter.SetColor( shared_player_color.Color );
+	}
 #endregion
 
 #region Implementation
