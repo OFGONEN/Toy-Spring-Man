@@ -40,6 +40,9 @@ public class Player : MonoBehaviour
     private void Awake()
     {
 		onUpdateMethod = ExtensionMethods.EmptyMethod;
+
+		tightSpring_upper_renderer.enabled  = false;
+		tightSpring_bottom_renderer.enabled = false;
 	}
 
     private void Update()
@@ -52,6 +55,12 @@ public class Player : MonoBehaviour
     public void OnLevelStart()
     {
 		onUpdateMethod = Movement;
+
+		body_upper_animator.SetTrigger( "run" );
+		body_bottom_animator.SetTrigger( "run" );
+
+		tightSpring_upper_renderer.enabled  = true;
+		tightSpring_bottom_renderer.enabled = true;
 	}
 
     public void OnFinishLineReached()
