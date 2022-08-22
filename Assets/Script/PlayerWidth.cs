@@ -10,11 +10,11 @@ public class PlayerWidth : SharedFloatNotifier
 {
 	public void Add( float value )
 	{
-		SharedValue += value;
+		SharedValue = Mathf.Min( 100, sharedValue + value );
 	}
 
 	public void Substact( float value )
 	{
-		SharedValue -= value;
+		SharedValue = Mathf.Max( 0, sharedValue + value );
 	}
 }
