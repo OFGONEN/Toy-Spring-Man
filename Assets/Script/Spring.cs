@@ -20,8 +20,8 @@ public class Spring : MonoBehaviour
     [ SerializeField ] ColorSetter colorSetter;
 
 // Private
+	[ ShowInInspector, ReadOnly ] int spring_index;
 	Transform player_transform;
-	int spring_index;
 
 // Delegates
 	UnityMessage onUpdateMethod;
@@ -50,12 +50,12 @@ public class Spring : MonoBehaviour
 #region API
 	public void Spawn( int index, Vector3 spawnPosition )
 	{
+		player_transform   = notif_player_transform.sharedValue as Transform;
 		spring_index = index;
 
 		var scaleChange = shared_spring_value.sharedValue * GameSettings.Instance.spring_offset_scale.ReturnProgress( notif_player_width.Ratio );
 		transform.localScale = Vector3.one.SetY( 1 + scaleChange );
 
-		player_transform   = notif_player_transform.sharedValue as Transform;
 		transform.position = spawnPosition + Vector3.up * GameSettings.Instance.spring_offset_vertical * ( 1 + scaleChange * index );
 
 		onUpdateMethod = OnUpdate;
@@ -84,8 +84,7 @@ public class Spring : MonoBehaviour
 		    offsetHorizontal = Mathf.Clamp( transform.position.x - playerPosition.x, -offsetHorizontal, offsetHorizontal );
 		    offsetHorizontal = Mathf.Lerp( offsetHorizontal, 0, GameSettings.Instance.spring_speed_lateral * Time.deltaTime );
 
-		var offsetVertical = ( GameSettings.Instance.spring_offset_vertical * spring_index + GameSettings.Instance.spring_offset_vertical * scaleChange * spring_index );
-		offsetVertical += GameSettings.Instance.spring_offset_ground;
+		var offsetVertical = GameSettings.Instance.spring_offset_vertical * spring_index + GameSettings.Instance.spring_offset_vertical * scaleChange * spring_index + GameSettings.Instance.spring_offset_ground;
 
 		transform.position = playerPosition + offsetVertical * Vector3.up + offsetHorizontal * Vector3.right;
 	}
