@@ -3,10 +3,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FFStudio;
+using Sirenix.OdinInspector;
 
 public class Spring : MonoBehaviour
 {
 #region Fields
+  [ Title( "Components" ) ]
+    [ SerializeField ] SkinnedMeshRenderer _skinRenderer;
+    [ SerializeField ] ColorSetter colorSetter;
 #endregion
 
 #region Properties
@@ -16,6 +21,15 @@ public class Spring : MonoBehaviour
 #endregion
 
 #region API
+    public void OnColorChange( Color color )
+    {
+		colorSetter.SetColor( color );
+	}
+
+    public void OnPlayerWidhtChange( float value )
+    {
+		_skinRenderer.SetBlendShapeWeight( 0, value );
+	}
 #endregion
 
 #region Implementation
