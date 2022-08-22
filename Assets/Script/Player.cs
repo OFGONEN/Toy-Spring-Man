@@ -82,6 +82,18 @@ public class Player : MonoBehaviour
 		body_upper_colorSetter.SetColor( shared_player_color.Color );
 		body_bottom_colorSetter.SetColor( shared_player_color.Color );
 	}
+
+	public void OnPlayerLength_Gained( int count )
+	{
+		var spring = pool_spring.GetEntity();
+
+		shared_player_length.SharedValue = spring_list.Count;
+	}
+
+	public void OnPlayerLength_Lost( int index )
+	{
+
+	}
 #endregion
 
 #region Implementation
