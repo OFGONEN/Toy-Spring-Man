@@ -21,7 +21,7 @@ public class Spring : MonoBehaviour
 
 // Private
 	Transform player_transform;
-	int index;
+	int spring_index;
 
 // Delegates
 	UnityMessage onUpdateMethod;
@@ -50,6 +50,8 @@ public class Spring : MonoBehaviour
 #region API
 	public void Spawn( int index, Vector3 spawnPosition )
 	{
+		spring_index = index;
+
 		var scaleChange = shared_spring_value.sharedValue * GameSettings.Instance.spring_offset_scale.ReturnProgress( notif_player_width.Ratio );
 		transform.localScale = Vector3.one.SetY( 1 + scaleChange );
 
