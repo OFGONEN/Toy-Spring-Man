@@ -217,5 +217,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eacf92d651c34ee7b99e1d24cea720c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data_color: {fileID: 0}
+  data_color: {fileID: 11400000, guid: e9622337a795e454eafa78b6e46786c7, type: 2}
   data_color_player: {fileID: 11400000, guid: 18f5b34fea0e0435ab7cbda0feace9eb, type: 2}
