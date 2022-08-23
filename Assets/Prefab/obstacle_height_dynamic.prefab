@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: obstacle_height_dynamic
       objectReference: {fileID: 0}
+    - target: {fileID: 4087664825852236676, guid: 5d474666a3e5d474989250d6378a5cc0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5815671358597571279, guid: 5d474666a3e5d474989250d6378a5cc0, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
