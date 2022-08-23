@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
 	[ SerializeField ] PoolSpring pool_spring;
 
   [ Title( "Components" ) ]
+	[ SerializeField ] Transform body_upper_transform;
 	[ SerializeField ] Renderer tightSpring_upper_renderer;
 	[ SerializeField ] Renderer tightSpring_bottom_renderer;
 	[ SerializeField ] Animator body_upper_animator;
@@ -130,6 +131,7 @@ public class Player : MonoBehaviour
 		position.z += GameSettings.Instance.player_movement_speed_forward * Time.deltaTime;
 
 		transform.position = position;
+		body_upper_transform.position = spring_list.Count > 0 ? spring_list[ spring_list.Count - 1 ].AttachPoint() : position + Vector3.up * GameSettings.Instance.player_offset_upper_body;
 
 		//Info: Since LeanTouch executive order is before default time, We can default an input value every frame after use
 		shared_input_drag.sharedValue = Vector2.zero;
