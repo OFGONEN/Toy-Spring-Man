@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player_movement_speed_forward: 0
   player_movement_speed_lateral: 0.1
-  player_movement_clamp_lateral: 1
+  player_movement_clamp_lateral: 3
+  player_offset_upper_body: 2
   spring_offset_ground: 2
   spring_offset_vertical: 2
   spring_offset_horizontal: {x: 0.2, y: 0.05}

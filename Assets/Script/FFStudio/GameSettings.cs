@@ -15,6 +15,7 @@ namespace FFStudio
         [ LabelText( "Player Movement Speed Forward" ) ] public float player_movement_speed_forward;
         [ LabelText( "Player Movement Speed Lateral" ) ] public float player_movement_speed_lateral;
         [ LabelText( "Player Movement Clamp Lateral" ) ] public float player_movement_clamp_lateral;
+        [ LabelText( "Player Upper Body Offset" ) ] public float player_offset_upper_body = 2f;
 
     [ Title( "Spring" ) ]
         [ LabelText( "Spring offset from ground" ) ] public float spring_offset_ground;
