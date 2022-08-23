@@ -14,8 +14,10 @@ public class Spring : MonoBehaviour
 	[ SerializeField ] PlayerWidth notif_player_width;
 	[ SerializeField ] SharedReferenceNotifier notif_player_transform;
 	[ SerializeField ] PoolSpring pool_spring;
+	[ SerializeField ] IntGameEvent event_player_length_lost;
 
   [ Title( "Components" ) ]
+    [ SerializeField ] Collider _collider;
     [ SerializeField ] SkinnedMeshRenderer _skinRenderer;
     [ SerializeField ] ColorSetter colorSetter;
 
@@ -53,9 +55,16 @@ public class Spring : MonoBehaviour
 		player_transform   = notif_player_transform.sharedValue as Transform;
 		spring_index = index;
 
+		_collider.enabled = true;
+
 		OnUpdate();
 
 		onUpdateMethod = OnUpdate;
+	}
+
+	public void OnTrigger()
+	{
+		event_player_length_lost.Raise( spring_index );
 	}
 
 	public void DropOff()
