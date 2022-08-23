@@ -21,6 +21,8 @@ MonoBehaviour:
   spring_offset_horizontal: {x: 0.2, y: 0.05}
   spring_offset_scale: {x: 0.2, y: 0.1}
   spring_speed_lateral: 10
+  spring_speed_tighten: 2
+  spring_offset_tighten: -0.5
   spring_punch_lateral_duration: 0.7
   spring_punch_lateral_vibrato: 10
   spring_punch_lateral_elasticity: 1
@@ -28,11 +30,16 @@ MonoBehaviour:
   spring_punch_vertical_big_duration: 1
   spring_punch_vertical_big_vibrato: 10
   spring_punch_vertical_big_elasticity: 1.25
-  spring_punch_vertical_big_ease: 0
+  spring_punch_vertical_big_ease: 25
   spring_punch_vertical_small_duration: 0.65
   spring_punch_vertical_small_vibrato: 5
   spring_punch_vertical_small_elasticity: 0.75
-  spring_punch_vertical_small_ease: 0
+  spring_punch_vertical_small_ease: 25
+  spring_punch_vertical_tight_duration: 0.65
+  spring_punch_vertical_tight_vibrato: 8
+  spring_punch_vertical_tight_elasticity: 1
+  spring_punch_vertical_tight_ease: 25
+  spring_punch_vertical_tight_smallest_ratio: 0.25
   camera_follow_speed: 1
   camera_follow_offset_start: {x: 2, y: 2, z: -10}
   camera_follow_offset_end: {x: 2, y: 4, z: -12}

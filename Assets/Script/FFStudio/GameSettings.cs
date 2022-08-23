@@ -22,7 +22,9 @@ namespace FFStudio
         [ LabelText( "Spring offset Vertical" ) ] public float spring_offset_vertical;
         [ LabelText( "Spring offset Horizontal" ) ] public Vector2 spring_offset_horizontal;
         [ LabelText( "Spring offset Scale" ) ] public Vector2 spring_offset_scale;
-        [ LabelText( "Spring Speed Lateral" ) ] public float spring_speed_lateral; //todo make it vector2 ?:
+        [ LabelText( "Spring Speed Lateral" ) ] public float spring_speed_lateral;
+        [ LabelText( "Spring Speed Tighten" ) ] public float spring_speed_tighten = 2f;
+        [ LabelText( "Spring Ratio Tighten" ) ] public float spring_offset_tighten = -0.25f;
 
     [ Title( "Spring Punch Lateral" ) ]
         public float spring_punch_lateral_duration = 0.7f;
@@ -30,17 +32,22 @@ namespace FFStudio
         public float spring_punch_lateral_elasticity = 1f;
 		public Ease spring_punch_lateral_ease;
 
-    [ Title( "Spring Punch Lateral" ) ]
+    [ Title( "Spring Punch Vertical Big" ) ]
         public float spring_punch_vertical_big_duration = 1f;
         public int spring_punch_vertical_big_vibrato = 10;
         public float spring_punch_vertical_big_elasticity = 1.25f;
 		public Ease spring_punch_vertical_big_ease;
+    [ Title( "Spring Punch Vertical Small" ) ]
         public float spring_punch_vertical_small_duration = 0.65f;
         public int spring_punch_vertical_small_vibrato = 8;
         public float spring_punch_vertical_small_elasticity = 1f;
 		public Ease spring_punch_vertical_small_ease;
-
-
+    [ Title( "Spring Punch Vertical Tight" ) ]
+		public float spring_punch_vertical_tight_duration = 0.65f;
+		public int spring_punch_vertical_tight_vibrato = 8;
+		public float spring_punch_vertical_tight_elasticity = 1f;
+		public Ease spring_punch_vertical_tight_ease;
+		public float spring_punch_vertical_tight_smallest_ratio = 0.1f;
     
     [ Title( "Camera" ) ]
         [ LabelText( "Follow Speed" ) ] public float camera_follow_speed;
