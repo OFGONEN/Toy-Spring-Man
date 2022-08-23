@@ -14,6 +14,7 @@ public class ColorData : ScriptableObject
     [ LabelText( "Color ID" ), SerializeField ] int data_id;
 
     public int ColorID => data_id;
+    public Color Color => data_color;
 #endregion
 
 #region Properties
