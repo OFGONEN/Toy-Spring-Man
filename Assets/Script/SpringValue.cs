@@ -15,6 +15,8 @@ public class SpringValue : SharedFloat
     Vector3 punch;
 
 	RecycledTween recycledTween = new RecycledTween();
+
+	public bool CanTighten => !recycledTween.IsPlaying();
 #endregion
 
 #region Properties
@@ -51,6 +53,30 @@ public class SpringValue : SharedFloat
 			.OnUpdate( OnPunchUpdate ) 
 		);
 	}
+
+	public void DoTighten()
+	{
+		sharedValue = Mathf.Lerp( sharedValue, GameSettings.Instance.spring_offset_tighten, Time.deltaTime * GameSettings.Instance.spring_speed_tighten );
+	}
+
+	public void DoTightPunch()
+	{
+		sharedValue = 0;
+		punch = Vector3.zero;
+
+		var duration   = Mathf.Lerp( GameSettings.Instance.spring_punch_vertical_tight_duration * GameSettings.Instance.spring_punch_vertical_tight_smallest_ratio, GameSettings.Instance.spring_punch_vertical_tight_duration, Mathf.Abs( sharedValue ) );
+
+		var vibrato    = Mathf.FloorToInt( Mathf.Lerp( GameSettings.Instance.spring_punch_vertical_tight_vibrato * GameSettings.Instance.spring_punch_vertical_tight_smallest_ratio, GameSettings.Instance.spring_punch_vertical_tight_vibrato, Mathf.Abs( sharedValue ) ) );
+
+		var elasticity = Mathf.Lerp( GameSettings.Instance.spring_punch_vertical_tight_elasticity * GameSettings.Instance.spring_punch_vertical_tight_smallest_ratio, GameSettings.Instance.spring_punch_vertical_tight_elasticity, Mathf.Abs( sharedValue ) );
+
+		recycledTween.Recycle( DOTween.Punch( GetPunchValue, SetPunchValue, Vector3.up,
+			duration,
+			vibrato,
+			elasticity )
+			.OnUpdate( OnPunchUpdate )
+		);
+	}
 #endregion
 
 #region Implementation
@@ -67,6 +93,16 @@ public class SpringValue : SharedFloat
 	void SetPunchValue( Vector3 value )
 	{
 		punch = value;
+	}
+
+	float GetSpringValue()
+	{
+		return sharedValue;
+	}
+
+	void SetSpringValue( float value )
+	{
+		sharedValue = value;
 	}
 #endregion
 
