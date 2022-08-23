@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
   [ Title( "Shared Variables" ) ]
     [ SerializeField ] ColorData shared_player_color;
     [ SerializeField ] PlayerLength shared_player_length;
+    [ SerializeField ] SpringValue shared_spring_value;
     [ SerializeField ] SharedVector2 shared_input_drag;
     [ SerializeField ] SharedVector3 shared_levelEnd_position;
 	[ SerializeField ] PoolSpring pool_spring;
