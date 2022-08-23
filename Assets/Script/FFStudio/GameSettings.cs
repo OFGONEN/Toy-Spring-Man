@@ -29,6 +29,18 @@ namespace FFStudio
         public int spring_punch_lateral_vibrato = 10;
         public float spring_punch_lateral_elasticity = 1f;
 		public Ease spring_punch_lateral_ease;
+
+    [ Title( "Spring Punch Lateral" ) ]
+        public float spring_punch_vertical_big_duration = 1f;
+        public int spring_punch_vertical_big_vibrato = 10;
+        public float spring_punch_vertical_big_elasticity = 1.25f;
+		public Ease spring_punch_vertical_big_ease;
+        public float spring_punch_vertical_small_duration = 0.65f;
+        public int spring_punch_vertical_small_vibrato = 8;
+        public float spring_punch_vertical_small_elasticity = 1f;
+		public Ease spring_punch_vertical_small_ease;
+
+
     
     [ Title( "Camera" ) ]
         [ LabelText( "Follow Speed" ) ] public float camera_follow_speed;
