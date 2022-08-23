@@ -29,9 +29,9 @@ public class Collectable : MonoBehaviour
     public void OnTrigger()
     {
         if( data_color.ColorID == data_color_player.ColorID )
-			event_player_length_gained.Raise( data_value );
+			event_player_length_gained.Raise( 1 );
 		else
-			event_player_length_lost.Raise( data_value );
+			event_player_length_lost.Raise( 0 );
 	}
 #endregion
 
