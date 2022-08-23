@@ -79,6 +79,12 @@ public class Spring : MonoBehaviour
     {
 		_skinRenderer.SetBlendShapeWeight( 0, value );
 	}
+
+	public Vector3 AttachPoint()
+	{
+		var scaleChange = shared_spring_value.sharedValue * GameSettings.Instance.spring_offset_scale.ReturnProgress( notif_player_width.Ratio );
+		return transform.position + Vector3.up * ( GameSettings.Instance.spring_offset_vertical + GameSettings.Instance.spring_offset_vertical * scaleChange );
+	}
 #endregion
 
 #region Implementation
