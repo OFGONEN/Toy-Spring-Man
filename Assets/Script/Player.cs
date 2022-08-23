@@ -114,6 +114,12 @@ public class Player : MonoBehaviour
 		shared_spring_value.DoPunch();
 
 		shared_player_length.SharedValue = spring_list.Count;
+
+		if( spring_list.Count == 0 )
+		{
+			// tightSpring_upper_renderer.enabled  = false;
+			// tightSpring_bottom_renderer.enabled = false;
+		}
 	}
 #endregion
 
