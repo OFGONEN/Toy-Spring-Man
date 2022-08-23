@@ -10,7 +10,7 @@ MonoImporter:
   - pool_spring: {fileID: 11400000, guid: aa95d39e4dfb843b883ebe99acc1bd13, type: 2}
   - _skinRenderer: {instanceID: 0}
   - colorSetter: {instanceID: 0}
-  executionOrder: 0
+  executionOrder: 200
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 
