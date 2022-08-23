@@ -11,6 +11,10 @@ using Sirenix.OdinInspector;
 public class SpringValue : SharedFloat
 {
 #region Fields
+// Private
+    Vector3 punch;
+
+	RecycledTween recycledTween = new RecycledTween();
 #endregion
 
 #region Properties
@@ -20,23 +24,36 @@ public class SpringValue : SharedFloat
 #endregion
 
 #region API
+    [ Button() ]
+    public void DoPunchBig()
+    {
+		sharedValue = 0;
+		punch = Vector3.zero;
+
+		recycledTween.Recycle( DOTween.Punch( GetPunchValue, SetPunchValue, Vector3.up,
+			GameSettings.Instance.spring_punch_vertical_big_duration,
+			GameSettings.Instance.spring_punch_vertical_big_vibrato,
+			GameSettings.Instance.spring_punch_vertical_big_elasticity )
+			.OnUpdate( OnPunchUpdate ) 
+		);
+	}
+
+    [ Button() ]
+    public void DoPunchSmall()
+    {
+		sharedValue = 0;
+		punch = Vector3.zero;
+
+		recycledTween.Recycle( DOTween.Punch( GetPunchValue, SetPunchValue, Vector3.up,
+			GameSettings.Instance.spring_punch_vertical_small_duration,
+			GameSettings.Instance.spring_punch_vertical_small_vibrato,
+			GameSettings.Instance.spring_punch_vertical_small_elasticity )
+			.OnUpdate( OnPunchUpdate ) 
+		);
+	}
 #endregion
 
 #region Implementation
-#endregion
-
-#region Editor Only
-#if UNITY_EDITOR
-    Vector3 punch;
-
-    [ Button() ]
-    public void DoPunch()
-    {
-		sharedValue = 0;
-		punch = Vector3.one * sharedValue;
-		DOTween.Punch( GetPunchValue, SetPunchValue, Vector3.up, 2 ).OnUpdate( OnPunchUpdate );
-	}
-
 	void OnPunchUpdate()
 	{
 		sharedValue = punch.y;
@@ -51,6 +68,10 @@ public class SpringValue : SharedFloat
 	{
 		punch = value;
 	}
+#endregion
+
+#region Editor Only
+#if UNITY_EDITOR
 #endif
 #endregion
 }
