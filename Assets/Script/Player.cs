@@ -96,6 +96,7 @@ public class Player : MonoBehaviour
 		spring_list.Add( spring );
 
 		shared_player_length.SharedValue = spring_list.Count;
+		shared_spring_value.DoPunchSmall();
 	}
 
 	public void OnPlayerLength_Lost( IntGameEvent gameEvent )
@@ -111,9 +112,9 @@ public class Player : MonoBehaviour
 		}
 
 		spring_list.RemoveAt( spring_list.Count - 1 );
-		shared_spring_value.DoPunch();
 
 		shared_player_length.SharedValue = spring_list.Count;
+		shared_spring_value.DoPunchBig();
 
 		if( spring_list.Count == 0 )
 		{
