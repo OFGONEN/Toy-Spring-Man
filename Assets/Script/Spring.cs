@@ -53,10 +53,7 @@ public class Spring : MonoBehaviour
 		player_transform   = notif_player_transform.sharedValue as Transform;
 		spring_index = index;
 
-		var scaleChange = shared_spring_value.sharedValue * GameSettings.Instance.spring_offset_scale.ReturnProgress( notif_player_width.Ratio );
-		transform.localScale = Vector3.one.SetY( 1 + scaleChange );
-
-		transform.position = spawnPosition + Vector3.up * GameSettings.Instance.spring_offset_vertical * ( 1 + scaleChange * index );
+		OnUpdate();
 
 		onUpdateMethod = OnUpdate;
 	}
