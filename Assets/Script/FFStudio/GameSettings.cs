@@ -23,6 +23,12 @@ namespace FFStudio
         [ LabelText( "Spring offset Horizontal" ) ] public Vector2 spring_offset_horizontal;
         [ LabelText( "Spring offset Scale" ) ] public Vector2 spring_offset_scale;
         [ LabelText( "Spring Speed Lateral" ) ] public float spring_speed_lateral; //todo make it vector2 ?:
+
+    [ Title( "Spring Punch Lateral" ) ]
+        public float spring_punch_lateral_duration = 0.7f;
+        public int spring_punch_lateral_vibrato = 10;
+        public float spring_punch_lateral_elasticity = 1f;
+		public Ease spring_punch_lateral_ease;
     
     [ Title( "Camera" ) ]
         [ LabelText( "Follow Speed" ) ] public float camera_follow_speed;
