@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
 
 // Private
 	List< Spring > spring_list = new List< Spring >( 32 );
+	[ ShowInInspector, ReadOnly ] bool is_finger_down; 
 
     RecycledSequence recycledSequence = new RecycledSequence();
 // Delegates
@@ -54,6 +55,19 @@ public class Player : MonoBehaviour
 #endregion
 
 #region API
+	public void OnFingerDown()
+	{
+		is_finger_down = true;
+	}
+
+	public void OnFingerUp()
+	{
+		is_finger_down = false;
+
+		if( shared_spring_value.CanTighten && spring_list.Count > 0 )
+			shared_spring_value.DoTightPunch();
+	}
+
     public void OnLevelStart()
     {
 		onUpdateMethod = Movement;
@@ -96,6 +110,7 @@ public class Player : MonoBehaviour
 		spring_list.Add( spring );
 
 		shared_player_length.SharedValue = spring_list.Count;
+		shared_spring_value.DoPunchSmall();
 	}
 
 	public void OnPlayerLength_Lost( IntGameEvent gameEvent )
@@ -111,9 +126,9 @@ public class Player : MonoBehaviour
 		}
 
 		spring_list.RemoveAt( spring_list.Count - 1 );
-		shared_spring_value.DoPunch();
 
 		shared_player_length.SharedValue = spring_list.Count;
+		shared_spring_value.DoPunchBig();
 
 		if( spring_list.Count == 0 )
 		{
@@ -138,6 +153,9 @@ public class Player : MonoBehaviour
 
 		transform.position = position;
 		body_upper_transform.position = spring_list.Count > 0 ? spring_list[ spring_list.Count - 1 ].AttachPoint() : position + Vector3.up * GameSettings.Instance.player_offset_upper_body;
+
+		if( is_finger_down && shared_spring_value.CanTighten && spring_list.Count > 0 )
+			shared_spring_value.DoTighten();
 
 		//Info: Since LeanTouch executive order is before default time, We can default an input value every frame after use
 		shared_input_drag.sharedValue = Vector2.zero;
