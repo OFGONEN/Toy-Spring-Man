@@ -15,7 +15,7 @@ MonoImporter:
   - body_bottom_animator: {instanceID: 0}
   - body_upper_colorSetter: {instanceID: 0}
   - body_bottom_colorSetter: {instanceID: 0}
-  executionOrder: 0
+  executionOrder: 300
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 
