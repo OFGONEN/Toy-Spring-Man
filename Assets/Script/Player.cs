@@ -99,6 +99,20 @@ public class Player : MonoBehaviour
 
 	public void OnPlayerLength_Lost( IntGameEvent gameEvent )
 	{
+		var index = gameEvent.eventValue;
+
+		spring_list[ index ].DropOff();
+
+		for( var i = index; i < spring_list.Count - 1; i++ )
+		{
+			spring_list[ i ] = spring_list[ i + 1 ];
+			spring_list[ i ].FallOff( i );
+		}
+
+		spring_list.RemoveAt( spring_list.Count - 1 );
+		shared_spring_value.DoPunch();
+
+		shared_player_length.SharedValue = spring_list.Count;
 	}
 #endregion
 
