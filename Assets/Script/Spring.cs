@@ -58,6 +58,17 @@ public class Spring : MonoBehaviour
 		onUpdateMethod = OnUpdate;
 	}
 
+	public void DropOff()
+	{
+		pool_spring.ReturnEntity( this );
+	}
+
+	public void FallOff( int index )
+	{
+		spring_index = index;
+		OnUpdate();
+	}
+
     public void OnColorChange( Color color )
     {
 		colorSetter.SetColor( color );
