@@ -86,7 +86,7 @@ public class Spring : MonoBehaviour
 
     public void OnPlayerWidhtChange( float value )
     {
-		_skinRenderer.SetBlendShapeWeight( 0, value );
+		_skinRenderer.SetBlendShapeWeight( 0, notif_player_width.BlendRatio );
 	}
 
 	public Vector3 AttachPoint()
