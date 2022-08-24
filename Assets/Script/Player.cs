@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
 			var spring = pool_spring.GetEntity();
 			spring.gameObject.SetActive( true );
 
-			Vector3 spawnPosition = spring_list.Count > 0 ? spring_list[ spring_list.Count - 1 ].transform.position : transform.position;
+			Vector3 spawnPosition = spring_list.Count > 0 ? spring_list[ spring_list.Count - 1 ].AttachPoint() : transform.position;
 
 			spring.Spawn( spring_list.Count, spawnPosition );
 			spring_list.Add( spring );

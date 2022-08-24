@@ -55,6 +55,7 @@ public class Spring : MonoBehaviour
 		player_transform   = notif_player_transform.sharedValue as Transform;
 		spring_index = index;
 
+		transform.position = spawnPosition;
 		_collider.enabled = true;
 
 		OnUpdate();
