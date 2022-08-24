@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 34d7a16279fa22541a97feee6f807d0f
+guid: 3ca1ce8519e56b9428c4303efbff68f5
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -8,6 +8,11 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert1
+    second: {fileID: 2100000, guid: a2829df0bfae7214390d3aa9dcc77c64, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_sphere_head
     second: {fileID: 2100000, guid: a2829df0bfae7214390d3aa9dcc77c64, type: 2}
   materials:
     materialImportMode: 2
@@ -21,7 +26,8 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 1
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'Hips' not found\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -29,7 +35,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -46,7 +52,7 @@ ModelImporter:
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importVisibility: 0
-    importBlendShapes: 1
+    importBlendShapes: 0
     importCameras: 0
     importLights: 0
     nodeNameCollisionStrategy: 1
@@ -81,11 +87,51 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 0
+  importAnimation: 1
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: char_character_test_v1(Clone)
+      parentName: 
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface2
+      parentName: char_character_test_v1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface1
+      parentName: char_character_test_v1(Clone)
+      position: {x: -0, y: 1.3438461, z: -0.020710982}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCylinder2
+      parentName: char_character_test_v1(Clone)
+      position: {x: 0.00000010719881, y: 0.90913373, z: 0.017066112}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.15830527, y: 0.022158884, z: 0.15830527}
+    - name: looping_spring2
+      parentName: char_character_test_v1(Clone)
+      position: {x: -0.04936603, y: 1.0820999, z: -0.13470665}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: looping_spring1
+      parentName: char_character_test_v1(Clone)
+      position: {x: -0.049366035, y: 0.9756172, z: -0.13470665}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pCylinder1
+      parentName: char_character_test_v1(Clone)
+      position: {x: 0.00000007089289, y: 0.8402545, z: 0.017066136}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.15830527, y: 0.022158884, z: 0.15830527}
+    - name: looping_spring
+      parentName: char_character_test_v1(Clone)
+      position: {x: 0.0000000890822, y: 0.92242926, z: 0.017066136}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -100,9 +146,9 @@ ModelImporter:
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 2
+  animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
