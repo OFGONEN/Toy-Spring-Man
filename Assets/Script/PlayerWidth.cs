@@ -31,6 +31,7 @@ public class PlayerWidth : SharedFloatNotifier
 		Punch();
 	}
 
+	[ Button() ]
 	void Punch()
 	{
 		punch = Vector3.up * sharedValue;

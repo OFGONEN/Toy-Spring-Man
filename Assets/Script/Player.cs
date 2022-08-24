@@ -49,8 +49,8 @@ public class Player : MonoBehaviour
 		shared_player_color.ChangeData( CurrentLevelData.Instance.levelData.player_color_data );
 		OnPlayerColorChange();
 
-		// tightSpring_upper_renderer.enabled  = false;
-		// tightSpring_bottom_renderer.enabled = false;
+		tightSpring_upper_renderer.enabled  = false;
+		tightSpring_bottom_renderer.enabled = false;
 	}
 
     private void Update()
@@ -80,8 +80,8 @@ public class Player : MonoBehaviour
 		// body_upper_animator.SetTrigger( "run" );
 		// body_bottom_animator.SetTrigger( "run" );
 
-		// tightSpring_upper_renderer.enabled  = true;
-		// tightSpring_bottom_renderer.enabled = true;
+		tightSpring_upper_renderer.enabled  = true;
+		tightSpring_bottom_renderer.enabled = true;
 	}
 
     public void OnFinishLineReached()
@@ -144,8 +144,8 @@ public class Player : MonoBehaviour
 
 		if( spring_list.Count == 0 )
 		{
-			// tightSpring_upper_renderer.enabled  = false;
-			// tightSpring_bottom_renderer.enabled = false;
+			tightSpring_upper_renderer.enabled  = false;
+			tightSpring_bottom_renderer.enabled = false;
 		}
 	}
 #endregion

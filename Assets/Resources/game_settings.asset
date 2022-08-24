@@ -15,15 +15,15 @@ MonoBehaviour:
   player_movement_speed_forward: 2.5
   player_movement_speed_lateral: 0.1
   player_movement_clamp_lateral: 3
-  player_offset_upper_body: 1
+  player_offset_upper_body: 0.788
   spring_width_max: 1000
-  spring_offset_ground: 1
-  spring_offset_vertical: 2
+  spring_offset_ground: 0.8527
+  spring_offset_vertical: 0.106331
   spring_offset_horizontal: {x: 0.2, y: 0.05}
   spring_offset_scale: {x: 0.2, y: 0.1}
   spring_speed_lateral: 10
   spring_speed_tighten: 2
-  spring_offset_tighten: -0.5
+  spring_offset_tighten: -1
   spring_punch_lateral_duration: 0.7
   spring_punch_lateral_vibrato: 10
   spring_punch_lateral_elasticity: 1
