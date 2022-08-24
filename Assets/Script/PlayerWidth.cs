@@ -14,12 +14,13 @@ public class PlayerWidth : SharedFloatNotifier
 
 	Vector3 punch;
 
-	public float Ratio => sharedValue / 100f;
+	public float Ratio      => sharedValue / GameSettings.Instance.spring_width_max;
+	public float BlendRatio => sharedValue * 100f / GameSettings.Instance.spring_width_max;
 
 	[ Button() ]
 	public void Add( float value )
 	{
-		SharedValue = Mathf.Min( 100, sharedValue + value );
+		SharedValue = Mathf.Min( GameSettings.Instance.spring_width_max, sharedValue + value );
 		Punch();
 	}
 
