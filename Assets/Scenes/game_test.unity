@@ -528,6 +528,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1365803368546754860, guid: 680633b9c0886489c943491586c476c7, type: 3}
+      propertyPath: m_text
+      value: +25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1365803368546754860, guid: 680633b9c0886489c943491586c476c7, type: 3}
+      propertyPath: m_fontSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1365803368546754860, guid: 680633b9c0886489c943491586c476c7, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5549826539259565184, guid: 680633b9c0886489c943491586c476c7, type: 3}
       propertyPath: m_Name
       value: gate_width_positive
@@ -1723,6 +1735,18 @@ PrefabInstance:
     - target: {fileID: 4419398142781573048, guid: bf6b64c94b4a7457298b7cc29d2fa4f2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8434544209006067199, guid: bf6b64c94b4a7457298b7cc29d2fa4f2, type: 3}
+      propertyPath: m_text
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8434544209006067199, guid: bf6b64c94b4a7457298b7cc29d2fa4f2, type: 3}
+      propertyPath: m_fontSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8434544209006067199, guid: bf6b64c94b4a7457298b7cc29d2fa4f2, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf6b64c94b4a7457298b7cc29d2fa4f2, type: 3}
