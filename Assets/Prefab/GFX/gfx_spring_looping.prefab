@@ -83,6 +83,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: 34d7a16279fa22541a97feee6f807d0f, type: 3}
+      propertyPath: m_DirtyAABB
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: 34d7a16279fa22541a97feee6f807d0f, type: 3}
+      propertyPath: m_AABB.m_Center.x
+      value: 0.000008739531
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: 34d7a16279fa22541a97feee6f807d0f, type: 3}
+      propertyPath: m_AABB.m_Center.y
+      value: -0.00005138293
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: 34d7a16279fa22541a97feee6f807d0f, type: 3}
+      propertyPath: m_AABB.m_Center.z
+      value: 0.000011630356
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: 34d7a16279fa22541a97feee6f807d0f, type: 3}
+      propertyPath: m_AABB.m_Extent.x
+      value: 0.17793205
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: 34d7a16279fa22541a97feee6f807d0f, type: 3}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0.08749266
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: 34d7a16279fa22541a97feee6f807d0f, type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0.17783368
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: 34d7a16279fa22541a97feee6f807d0f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e8e02d86d9e0307479aef81b640c7d84, type: 2}
     - target: {fileID: 919132149155446097, guid: 34d7a16279fa22541a97feee6f807d0f, type: 3}
       propertyPath: m_Name
       value: prop_looping_spring_v1
