@@ -79,9 +79,6 @@ public class Player : MonoBehaviour
 
 		// body_upper_animator.SetTrigger( "run" );
 		// body_bottom_animator.SetTrigger( "run" );
-
-		tightSpring_upper_renderer.enabled  = true;
-		tightSpring_bottom_renderer.enabled = true;
 	}
 
     public void OnFinishLineReached()
@@ -123,6 +120,9 @@ public class Player : MonoBehaviour
 
 		shared_player_length.SharedValue = spring_list.Count;
 		shared_spring_value.DoPunchSmall();
+
+		tightSpring_upper_renderer.enabled  = true;
+		tightSpring_bottom_renderer.enabled = true;
 	}
 
 	public void OnPlayerLength_Lost( IntGameEvent gameEvent )
