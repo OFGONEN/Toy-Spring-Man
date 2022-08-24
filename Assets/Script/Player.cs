@@ -102,15 +102,20 @@ public class Player : MonoBehaviour
 		body_bottom_colorSetter.SetColor( shared_player_color.Color );
 	}
 
-	public void OnPlayerLength_Gained()
+	public void OnPlayerLength_Gained( IntGameEvent gameEvent )
 	{
-		var spring = pool_spring.GetEntity();
-		spring.gameObject.SetActive( true );
+		var count = gameEvent.eventValue;
 
-		Vector3 spawnPosition = spring_list.Count > 0 ? spring_list[ spring_list.Count - 1 ].transform.position : transform.position;
+		for( var i = 0; i < count; i++ )
+		{
+			var spring = pool_spring.GetEntity();
+			spring.gameObject.SetActive( true );
 
-		spring.Spawn( spring_list.Count, spawnPosition );
-		spring_list.Add( spring );
+			Vector3 spawnPosition = spring_list.Count > 0 ? spring_list[ spring_list.Count - 1 ].transform.position : transform.position;
+
+			spring.Spawn( spring_list.Count, spawnPosition );
+			spring_list.Add( spring );
+		}
 
 		shared_player_length.SharedValue = spring_list.Count;
 		shared_spring_value.DoPunchSmall();
