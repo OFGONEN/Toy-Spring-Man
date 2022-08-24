@@ -44,6 +44,9 @@ public class Player : MonoBehaviour
     {
 		onUpdateMethod = ExtensionMethods.EmptyMethod;
 
+		shared_player_color.ChangeData( CurrentLevelData.Instance.levelData.player_color_data );
+		OnPlayerColorChange();
+
 		// tightSpring_upper_renderer.enabled  = false;
 		// tightSpring_bottom_renderer.enabled = false;
 	}
