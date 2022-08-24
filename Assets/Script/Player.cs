@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
 	[ SerializeField ] Animator body_bottom_animator;
 	[ SerializeField ] ColorSetter body_upper_colorSetter;
 	[ SerializeField ] ColorSetter body_bottom_colorSetter;
+	[ SerializeField ] ColorSetter tightSpring_upper_colorSetter;
+	[ SerializeField ] ColorSetter tightSpring_bottom_colorSetter;
 
 // Private
 	List< Spring > spring_list = new List< Spring >( 32 );
@@ -100,6 +102,8 @@ public class Player : MonoBehaviour
 
 		body_upper_colorSetter.SetColor( shared_player_color.Color );
 		body_bottom_colorSetter.SetColor( shared_player_color.Color );
+		tightSpring_upper_colorSetter.SetColor( shared_player_color.Color );
+		tightSpring_bottom_colorSetter.SetColor( shared_player_color.Color );
 	}
 
 	public void OnPlayerLength_Gained( IntGameEvent gameEvent )
