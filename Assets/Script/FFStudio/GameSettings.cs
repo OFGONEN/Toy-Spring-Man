@@ -18,6 +18,7 @@ namespace FFStudio
         [ LabelText( "Player Upper Body Offset" ) ] public float player_offset_upper_body = 2f;
 
     [ Title( "Spring" ) ]
+        [ LabelText( "Spring Max Width" ) ] public float spring_width_max;
         [ LabelText( "Spring offset from ground" ) ] public float spring_offset_ground;
         [ LabelText( "Spring offset Vertical" ) ] public float spring_offset_vertical;
         [ LabelText( "Spring offset Horizontal" ) ] public Vector2 spring_offset_horizontal;
