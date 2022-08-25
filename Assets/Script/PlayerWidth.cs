@@ -13,6 +13,7 @@ public class PlayerWidth : SharedFloatNotifier
 	RecycledTween recycledTween = new RecycledTween();
 
 	Vector3 punch;
+	float baseValue;
 
 	public float Ratio      => sharedValue / GameSettings.Instance.spring_width_max;
 	public float BlendRatio => sharedValue * 100f / GameSettings.Instance.spring_width_max;
@@ -27,13 +28,15 @@ public class PlayerWidth : SharedFloatNotifier
 	[ Button() ]
 	public void Substact( float value )
 	{
-		SharedValue = Mathf.Max( 0, sharedValue + value );
+		SharedValue = Mathf.Max( 0, sharedValue - value );
 		Punch();
 	}
 
+	[ Button() ]
 	void Punch()
 	{
-		punch = Vector3.up * sharedValue;
+		punch     = Vector3.zero;
+		baseValue = sharedValue;
 
 		recycledTween.Recycle( DOTween.Punch( GetPunch, SetPunch, Vector3.up,
 			GameSettings.Instance.spring_punch_lateral_duration,
@@ -45,7 +48,7 @@ public class PlayerWidth : SharedFloatNotifier
 
 	void OnPunchUpdate()
 	{
-		SharedValue = punch.y;
+		SharedValue = baseValue + baseValue * punch.y;
 	}
 
 	Vector3 GetPunch()

@@ -38,6 +38,11 @@ namespace FFStudio
 			target_transform = notif_player_transform.sharedValue as Transform;
 			onUpdateMethod   = FollowTarget;
 		}
+
+        public void OnPlayerLengthChanged( int value )
+        {
+			shared_camera_offset_ratio.sharedValue = ( float )value / GameSettings.Instance.player_length_max_pseudo;
+		}
 #endregion
 
 #region Implementation

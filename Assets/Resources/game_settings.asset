@@ -12,18 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a385bd3b4416492409284c9a366cb52a, type: 3}
   m_Name: game_settings
   m_EditorClassIdentifier: 
-  player_movement_speed_forward: 2.5
+  player_movement_speed_forward: 2
   player_movement_speed_lateral: 0.1
   player_movement_clamp_lateral: 3
-  player_offset_upper_body: 1
+  player_offset_upper_body: 0.788
+  player_length_max_pseudo: 30
   spring_width_max: 1000
-  spring_offset_ground: 1
-  spring_offset_vertical: 2
-  spring_offset_horizontal: {x: 0.2, y: 0.05}
+  spring_speed_lateral: 5
+  spring_spawn_punch: 3
+  spring_spawn_punch_duration: 0.15
+  spring_horizontal_lowCount: 8
+  spring_offset_horizontal_lowCount: 0.25
+  spring_offset_ground: 0.8527
+  spring_offset_vertical: 0.106331
+  spring_offset_horizontal: {x: 0.8, y: 0.25}
+  spring_offset_horizontal_ease: 1
   spring_offset_scale: {x: 0.2, y: 0.1}
-  spring_speed_lateral: 10
   spring_speed_tighten: 2
-  spring_offset_tighten: -0.5
+  spring_offset_tighten: -1
   spring_punch_lateral_duration: 0.7
   spring_punch_lateral_vibrato: 10
   spring_punch_lateral_elasticity: 1
@@ -42,8 +48,8 @@ MonoBehaviour:
   spring_punch_vertical_tight_ease: 25
   spring_punch_vertical_tight_smallest_ratio: 0.25
   camera_follow_speed: 1
-  camera_follow_offset_start: {x: 2, y: 2, z: -10}
-  camera_follow_offset_end: {x: 2, y: 4, z: -12}
+  camera_follow_offset_start: {x: 2, y: 2.5, z: -5}
+  camera_follow_offset_end: {x: 2, y: 4, z: -10}
   maxLevelCount: 1
   useRemoteConfig_GameSettings: 0
   useRemoteConfig_Components: 0

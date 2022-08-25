@@ -70,6 +70,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1101170149530530358, guid: 86eb59ad6832d47e085e6c408a2ddf12, type: 3}
+      propertyPath: m_text
+      value: +0
+      objectReference: {fileID: 0}
     - target: {fileID: 1360382852880299981, guid: 86eb59ad6832d47e085e6c408a2ddf12, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.863
@@ -78,17 +82,9 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 4919586125858740893, guid: 86eb59ad6832d47e085e6c408a2ddf12, type: 3}
-      propertyPath: m_Size.x
-      value: 2.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4919586125858740893, guid: 86eb59ad6832d47e085e6c408a2ddf12, type: 3}
-      propertyPath: m_Size.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4919586125858740893, guid: 86eb59ad6832d47e085e6c408a2ddf12, type: 3}
-      propertyPath: m_Center.y
-      value: 0.25
+    - target: {fileID: 4469061079135707863, guid: 86eb59ad6832d47e085e6c408a2ddf12, type: 3}
+      propertyPath: data_positive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5121008518578686065, guid: 86eb59ad6832d47e085e6c408a2ddf12, type: 3}
       propertyPath: m_RootOrder
