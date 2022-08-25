@@ -19,14 +19,21 @@ namespace FFStudio
 
     [ Title( "Spring" ) ]
         [ LabelText( "Spring Max Width" ) ] public float spring_width_max;
-        [ LabelText( "Spring offset from ground" ) ] public float spring_offset_ground;
-        [ LabelText( "Spring offset Vertical" ) ] public float spring_offset_vertical;
+        [ LabelText( "Spring Speed Lateral" ) ] public float spring_speed_lateral;
+        [ LabelText( "Spring Spawn Scale" ) ] public float spring_spawn_punch;
+        [ LabelText( "Spring Spawn Scale Duration" ) ] public float spring_spawn_punch_duration;
+
+    [ Title( "Spring Low Count" ) ]
         [ LabelText( "Spring Horizontal Low Count" ) ] public int spring_horizontal_lowCount = 8;
         [ LabelText( "Spring offset Horizontal Low Count" ) ] public float spring_offset_horizontal_lowCount = 0.1f;
+    [ Title( "Spring Offset" ) ]
+        [ LabelText( "Spring offset from ground" ) ] public float spring_offset_ground;
+        [ LabelText( "Spring offset Vertical" ) ] public float spring_offset_vertical;
         [ LabelText( "Spring offset Horizontal" ) ] public Vector2 spring_offset_horizontal;
         [ LabelText( "Spring offset Horizontal Ease" ) ] public Ease spring_offset_horizontal_ease;
         [ LabelText( "Spring offset Scale" ) ] public Vector2 spring_offset_scale;
-        [ LabelText( "Spring Speed Lateral" ) ] public float spring_speed_lateral;
+
+    [ Title( "Spring Tighten" ) ]
         [ LabelText( "Spring Speed Tighten" ) ] public float spring_speed_tighten = 2f;
         [ LabelText( "Spring Ratio Tighten" ) ] public float spring_offset_tighten = -0.25f;
 
