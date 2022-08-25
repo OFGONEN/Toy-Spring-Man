@@ -53,7 +53,7 @@ public class Spring : MonoBehaviour
 #endregion
 
 #region API
-	public void Spawn( int index, Vector3 spawnPosition )
+	public void Spawn( int index, Vector3 spawnPosition, Color color )
 	{
 		player_transform   = notif_player_transform.sharedValue as Transform;
 		spring_index = index;
@@ -62,6 +62,7 @@ public class Spring : MonoBehaviour
 		_collider.enabled = true;
 
 		OnUpdate();
+		OnColorChange( color );
 
 		onUpdateMethod = OnUpdate;
 	}

@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
 
 			Vector3 spawnPosition = spring_list.Count > 0 ? spring_list[ spring_list.Count - 1 ].AttachPoint() : transform.position;
 
-			spring.Spawn( spring_list.Count, spawnPosition );
+			spring.Spawn( spring_list.Count, spawnPosition, shared_player_color.Color );
 			spring_list.Add( spring );
 		}
 
