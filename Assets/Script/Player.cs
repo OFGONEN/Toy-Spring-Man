@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
 
     public void OnLevelStart()
     {
-		onUpdateMethod = Movement;
+		onUpdateMethod = OnUpdate_Movement;
 
 		body_upper_animator.SetTrigger( "run" );
 		body_bottom_animator.SetTrigger( "run" );
@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
 
     public void OnFinishLineReached()
     {
-		onUpdateMethod = ExtensionMethods.EmptyMethod;
+		onUpdateMethod = OnUpdate_FinishLine;
 
 		// Level End Sequence
 		var sequence = recycledSequence.Recycle( OnEndLevelReached );
@@ -156,7 +156,7 @@ public class Player : MonoBehaviour
 #endregion
 
 #region Implementation
-    void Movement()
+    void OnUpdate_Movement()
     {
 		MoveForward();
 		SetUpperBodyPosition();
@@ -204,9 +204,15 @@ public class Player : MonoBehaviour
 		shared_player_position_delayed.sharedValue = offsetHorizontal + position.x;
 	}
 
+	void OnUpdate_FinishLine()
+	{
+		SetUpperBodyPosition();
+		SetPlayerDelayedPosition();
+	}
+
 	void OnEndLevelReached()
     {
-    }
+	}
 #endregion
 
 #region Editor Only
