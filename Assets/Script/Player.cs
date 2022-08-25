@@ -6,16 +6,19 @@ using UnityEngine;
 using FFStudio;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using UnityEditor;
 
 public class Player : MonoBehaviour
 {
 #region Fields
   [ Title( "Shared Variables" ) ]
     [ SerializeField ] ColorData shared_player_color;
+    [ SerializeField ] PlayerWidth notif_player_width;
     [ SerializeField ] PlayerLength shared_player_length;
     [ SerializeField ] SpringValue shared_spring_value;
     [ SerializeField ] SharedVector2 shared_input_drag;
     [ SerializeField ] SharedVector3 shared_levelEnd_position;
+    [ SerializeField ] SharedFloat shared_player_position_delayed;
 	[ SerializeField ] PoolSpring pool_spring;
 
   [ Title( "Components" ) ]
@@ -45,6 +48,8 @@ public class Player : MonoBehaviour
     private void Awake()
     {
 		onUpdateMethod = ExtensionMethods.EmptyMethod;
+
+		shared_player_position_delayed.sharedValue = transform.position.x;
 
 		shared_player_color.ChangeData( CurrentLevelData.Instance.levelData.player_color_data );
 		OnPlayerColorChange();
@@ -169,6 +174,17 @@ public class Player : MonoBehaviour
 		if( is_finger_down && shared_spring_value.CanTighten && spring_list.Count > 0 )
 			shared_spring_value.DoTighten();
 
+
+		var offsetHorizontal = GameSettings.Instance.spring_offset_horizontal.ReturnProgress( notif_player_width.Ratio );
+		var offsetHorizontalLowCount = GameSettings.Instance.spring_offset_horizontal_lowCount * ( float )( shared_player_length.sharedValue ) / GameSettings.Instance.spring_horizontal_lowCount;
+
+		var clampValue = shared_player_length.sharedValue < GameSettings.Instance.spring_horizontal_lowCount ? offsetHorizontalLowCount : offsetHorizontal;
+
+		offsetHorizontal = Mathf.Clamp( shared_player_position_delayed.sharedValue - position.x, -clampValue, clampValue );
+		offsetHorizontal = Mathf.Lerp( offsetHorizontal, 0, GameSettings.Instance.spring_speed_lateral * Time.deltaTime );
+
+		shared_player_position_delayed.sharedValue = offsetHorizontal + position.x;
+
 		//Info: Since LeanTouch executive order is before default time, We can default an input value every frame after use
 		shared_input_drag.sharedValue = Vector2.zero;
 	}
@@ -180,6 +196,10 @@ public class Player : MonoBehaviour
 
 #region Editor Only
 #if UNITY_EDITOR
+	private void OnDrawGizmos()
+	{
+		Gizmos.DrawWireSphere( Vector3.right * shared_player_position_delayed.sharedValue, 0.1f );
+	}
 #endif
 #endregion
 }
