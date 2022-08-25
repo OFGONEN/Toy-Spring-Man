@@ -74,8 +74,8 @@ public class Player : MonoBehaviour
 	{
 		is_finger_down = false;
 
-		if( shared_spring_value.CanTighten && spring_list.Count > 0 )
-			shared_spring_value.DoTightPunch();
+		// if( shared_spring_value.CanTighten && spring_list.Count > 0 )
+			// shared_spring_value.DoTightPunch();
 	}
 
     public void OnLevelStart()
@@ -171,9 +171,8 @@ public class Player : MonoBehaviour
 		transform.position = position;
 		body_upper_transform.position = spring_list.Count > 0 ? spring_list[ spring_list.Count - 1 ].AttachPoint() : position + Vector3.up * GameSettings.Instance.player_offset_upper_body;
 
-		if( is_finger_down && shared_spring_value.CanTighten && spring_list.Count > 0 )
-			shared_spring_value.DoTighten();
-
+		// if( is_finger_down && shared_spring_value.CanTighten && spring_list.Count > 0 )
+			// shared_spring_value.DoTighten();
 
 		var offsetHorizontal = GameSettings.Instance.spring_offset_horizontal.ReturnProgress( notif_player_width.Ratio );
 		var offsetHorizontalLowCount = GameSettings.Instance.spring_offset_horizontal_lowCount * ( float )( shared_player_length.sharedValue ) / GameSettings.Instance.spring_horizontal_lowCount;
