@@ -82,8 +82,8 @@ public class Player : MonoBehaviour
     {
 		onUpdateMethod = OnUpdate_Movement;
 
-		body_upper_animator.SetTrigger( "run" );
-		body_bottom_animator.SetTrigger( "run" );
+		body_upper_animator.SetBool( "run", true );
+		body_bottom_animator.SetBool( "run", true );
 	}
 
     public void OnFinishLineReached()
@@ -212,6 +212,8 @@ public class Player : MonoBehaviour
 
 	void OnEndLevelReached()
     {
+		body_upper_animator.SetBool( "run", false );
+		body_bottom_animator.SetBool( "run", false );
 	}
 #endregion
 
