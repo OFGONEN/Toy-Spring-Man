@@ -27,7 +27,7 @@ public class PlayerWidth : SharedFloatNotifier
 	[ Button() ]
 	public void Substact( float value )
 	{
-		SharedValue = Mathf.Max( 0, sharedValue + value );
+		SharedValue = Mathf.Max( 0, sharedValue - value );
 		Punch();
 	}
 
