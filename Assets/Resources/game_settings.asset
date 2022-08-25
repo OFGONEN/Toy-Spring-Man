@@ -16,6 +16,7 @@ MonoBehaviour:
   player_movement_speed_lateral: 0.1
   player_movement_clamp_lateral: 3
   player_offset_upper_body: 0.788
+  player_length_max_pseudo: 30
   spring_width_max: 1000
   spring_speed_lateral: 5
   spring_spawn_punch: 3

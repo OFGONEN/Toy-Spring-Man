@@ -16,6 +16,7 @@ namespace FFStudio
         [ LabelText( "Player Movement Speed Lateral" ) ] public float player_movement_speed_lateral;
         [ LabelText( "Player Movement Clamp Lateral" ) ] public float player_movement_clamp_lateral;
         [ LabelText( "Player Upper Body Offset" ) ] public float player_offset_upper_body = 2f;
+        [ LabelText( "Player Pseudo Max Length" ) ] public int player_length_max_pseudo = 30;
 
     [ Title( "Spring" ) ]
         [ LabelText( "Spring Max Width" ) ] public float spring_width_max;
