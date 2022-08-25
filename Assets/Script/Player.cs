@@ -82,8 +82,8 @@ public class Player : MonoBehaviour
     {
 		onUpdateMethod = Movement;
 
-		// body_upper_animator.SetTrigger( "run" );
-		// body_bottom_animator.SetTrigger( "run" );
+		body_upper_animator.SetTrigger( "run" );
+		body_bottom_animator.SetTrigger( "run" );
 	}
 
     public void OnFinishLineReached()
