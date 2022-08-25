@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: mat_character
+  m_Name: mat_character_upper
   m_Shader: {fileID: -6465566751694194690, guid: 7cbb83c2770432449af64c1d33622735, type: 3}
   m_ValidKeywords:
   - _DRAW_WHICH_PART_UPPER
