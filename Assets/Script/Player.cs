@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
 		onUpdateMethod = ExtensionMethods.EmptyMethod;
 
 		shared_player_position_delayed.sharedValue = transform.position.x;
-
+		shared_player_length.SetValue_NotifyAlways( 0 );
 		shared_player_color.ChangeData( CurrentLevelData.Instance.levelData.player_color_data );
 		OnPlayerColorChange();
 
