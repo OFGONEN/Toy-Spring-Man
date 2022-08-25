@@ -65,6 +65,10 @@ public class Spring : MonoBehaviour
 		OnColorChange( color );
 		OnPlayerWidhtChange( 0 );
 
+		transform.localScale = Vector3.one.SetX( GameSettings.Instance.spring_spawn_punch ).SetY( GameSettings.Instance.spring_spawn_punch );
+		transform.DOScaleX( 1, GameSettings.Instance.spring_spawn_punch_duration );
+		transform.DOScaleZ( 1, GameSettings.Instance.spring_spawn_punch_duration );
+
 		onUpdateMethod = OnUpdate;
 	}
 
@@ -106,7 +110,7 @@ public class Spring : MonoBehaviour
 	void OnUpdate()
 	{
 		var scaleChange = shared_spring_value.sharedValue * GameSettings.Instance.spring_offset_scale.ReturnProgress( notif_player_width.Ratio );
-		transform.localScale = Vector3.one.SetY( 1 + scaleChange );
+		transform.localScale = transform.localScale.SetY( 1 + scaleChange );
 
 		var   playerPosition  = player_transform.position;
 		float indexRatio      = ( float )spring_index / ( Mathf.Max( 1, shared_player_length.sharedValue - 1 ) );
