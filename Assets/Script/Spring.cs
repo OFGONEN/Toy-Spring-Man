@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FFStudio;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 
 public class Spring : MonoBehaviour
@@ -12,6 +13,8 @@ public class Spring : MonoBehaviour
   [ Title( "Shared Variables" ) ]
 	[ SerializeField ] SharedFloat shared_spring_value; // ( -1, +1 )
 	[ SerializeField ] PlayerWidth notif_player_width;
+	[ SerializeField ] PlayerLength shared_player_length;
+	[ SerializeField ] SharedFloat shared_player_position_delayed;
 	[ SerializeField ] SharedReferenceNotifier notif_player_transform;
 	[ SerializeField ] PoolSpring pool_spring;
 	[ SerializeField ] IntGameEvent event_player_length_lost;
@@ -103,11 +106,11 @@ public class Spring : MonoBehaviour
 		var scaleChange = shared_spring_value.sharedValue * GameSettings.Instance.spring_offset_scale.ReturnProgress( notif_player_width.Ratio );
 		transform.localScale = Vector3.one.SetY( 1 + scaleChange );
 
-		var playerPosition = player_transform.position;
+		var   playerPosition  = player_transform.position;
+		float indexRatio      = ( float )spring_index / ( Mathf.Max( 1, shared_player_length.sharedValue - 1 ) );
+		var   indexRatioEased = DOVirtual.EasedValue( 0, 1, indexRatio, GameSettings.Instance.spring_offset_horizontal_ease );
 
-		var offsetHorizontal = GameSettings.Instance.spring_offset_horizontal.ReturnProgress( notif_player_width.Ratio ) * ( spring_index + 1 );
-		    offsetHorizontal = Mathf.Clamp( transform.position.x - playerPosition.x, -offsetHorizontal, offsetHorizontal );
-		    offsetHorizontal = Mathf.Lerp( offsetHorizontal, 0, GameSettings.Instance.spring_speed_lateral * Time.deltaTime );
+		var offsetHorizontal = ( shared_player_position_delayed.sharedValue - playerPosition.x ) * indexRatioEased;
 
 		var offsetVertical = GameSettings.Instance.spring_offset_vertical * spring_index + GameSettings.Instance.spring_offset_vertical * scaleChange * spring_index + GameSettings.Instance.spring_offset_ground;
 
