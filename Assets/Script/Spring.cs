@@ -63,6 +63,7 @@ public class Spring : MonoBehaviour
 
 		OnUpdate();
 		OnColorChange( color );
+		OnPlayerWidhtChange( 0 );
 
 		onUpdateMethod = OnUpdate;
 	}
