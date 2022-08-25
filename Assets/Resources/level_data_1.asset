@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene_index: 1
   scene_overrideAsActiveScene: 0
-  player_color_data: {fileID: 11400000, guid: ce91e0e2c22084384add047c34a7ef77, type: 2}
+  player_color_data: {fileID: 11400000, guid: e9622337a795e454eafa78b6e46786c7, type: 2}
