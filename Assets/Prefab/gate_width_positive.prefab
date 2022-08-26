@@ -120,6 +120,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30ac97d4147abda41897e63f522fed0c, type: 3}
+--- !u!198 &1648929059959061272 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19852780, guid: 30ac97d4147abda41897e63f522fed0c, type: 3}
+  m_PrefabInstance: {fileID: 1648929059973060340}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2142704654386271002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -140,9 +145,17 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4469061079135707863, guid: 86eb59ad6832d47e085e6c408a2ddf12, type: 3}
+      propertyPath: colorSetter
+      value: 
+      objectReference: {fileID: 587759734484833419}
+    - target: {fileID: 4469061079135707863, guid: 86eb59ad6832d47e085e6c408a2ddf12, type: 3}
       propertyPath: data_positive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4469061079135707863, guid: 86eb59ad6832d47e085e6c408a2ddf12, type: 3}
+      propertyPath: _particleSystem
+      value: 
+      objectReference: {fileID: 1648929059959061272}
     - target: {fileID: 5121008518578686065, guid: 86eb59ad6832d47e085e6c408a2ddf12, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -266,3 +279,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32e1ef05284fbec4c92f59f8b9b0e629, type: 3}
+--- !u!1 &5314568293133583719 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4285193727025734299, guid: 32e1ef05284fbec4c92f59f8b9b0e629, type: 3}
+  m_PrefabInstance: {fileID: 8266694983060416508}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &587759734484833419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5314568293133583719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61403d1aaad9442128114808f0675bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0, g: 0, b: 0, a: 0}
+  _renderer: {fileID: 5963293416005018802}
+--- !u!23 &5963293416005018802 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2339880099231712078, guid: 32e1ef05284fbec4c92f59f8b9b0e629, type: 3}
+  m_PrefabInstance: {fileID: 8266694983060416508}
+  m_PrefabAsset: {fileID: 0}
