@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: tool_level_creator
   m_EditorClassIdentifier: 
   ground_count: 11
-  object_finishLine: {fileID: 7169710899169753449, guid: 426a339171d9b42d182b61f9041bbc8f, type: 3}
+  data_finishLine:
+    finishLine_object: {fileID: 7169710899169753449, guid: 426a339171d9b42d182b61f9041bbc8f, type: 3}
+    finishLine_offset: 5
   data_ground:
     ground_object: {fileID: 6890220854897602685, guid: eb32c38b815aa204a9bc7af75dd27582, type: 3}
     ground_length: 5

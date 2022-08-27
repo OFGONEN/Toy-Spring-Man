@@ -17,7 +17,7 @@ public class LevelCreator : ScriptableObject
     [ SerializeField ] public int ground_count;
 
   [ Title( "Data Setup" ) ]
-    [ SerializeField ] GameObject object_finishLine;
+    [ SerializeField ] FinishLineData data_finishLine;
     [ SerializeField ] GroundData data_ground;
     // [ SerializeField ] FinalStageData data_finalStage;
 
@@ -39,7 +39,7 @@ public class LevelCreator : ScriptableObject
 			ground.transform.localPosition = Vector3.forward * i * data_ground.ground_length;
 		}
 
-		var finishLine = PrefabUtility.InstantiatePrefab( object_finishLine ) as GameObject;
+		var finishLine = PrefabUtility.InstantiatePrefab( data_finishLine.finishLine_object ) as GameObject;
 		finishLine.transform.SetParent( environmentParent );
         finishLine.transform.localPosition = Vector3.forward * ( i * data_ground.ground_length );
 
@@ -58,7 +58,7 @@ public struct GroundData
 public struct FinishLineData
 {
 	public GameObject finishLine_object;
-    public float finishLine_offset;
+	public float finishLine_offset;
 }
 
 [ Serializable ]
