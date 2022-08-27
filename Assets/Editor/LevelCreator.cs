@@ -13,12 +13,14 @@ using Sirenix.OdinInspector;
 [ CreateAssetMenu( fileName = "tool_level_creator", menuName = "FFEditor/Tool/Level Creator" ) ]
 public class LevelCreator : ScriptableObject
 {
-  [ Title( "Environment Setup" ) ]
+  [ Title( "Setup" ) ]
     [ SerializeField ] public int ground_count;
 
   [ Title( "Data Setup" ) ]
+    [ SerializeField ] FinalStageData data_finalStage;
     [ SerializeField ] FinishLineData data_finishLine;
     [ SerializeField ] GroundData data_ground;
+    [ SerializeField ] StepPlatformData data_stepPlatform; 
     // [ SerializeField ] FinalStageData data_finalStage;
 
     [ Button() ]
@@ -43,6 +45,10 @@ public class LevelCreator : ScriptableObject
 		finishLine.transform.SetParent( environmentParent );
         finishLine.transform.localPosition = Vector3.forward * ( i * data_ground.ground_length );
 
+		var finalStage = PrefabUtility.InstantiatePrefab( data_finalStage.finalStage_object ) as GameObject;
+		finalStage.transform.SetParent( environmentParent );
+        finalStage.transform.localPosition = Vector3.forward * ( i * data_ground.ground_length + data_finishLine.finishLine_offset + data_finalStage.finalStage_offset );
+
 	    AssetDatabase.SaveAssets();
 	}
 }
@@ -62,8 +68,15 @@ public struct FinishLineData
 }
 
 [ Serializable ]
-public struct EndLevelData
+public struct FinalStageData
 {
 	public GameObject finalStage_object;
     public float finalStage_offset;
+}
+
+[ Serializable ]
+public struct StepPlatformData
+{
+	public GameObject stepPlatform_object;
+    public float stepPlatform_offset;
 }
