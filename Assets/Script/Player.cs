@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
 	[ SerializeField ] ColorSetter tightSpring_upper_colorSetter;
 	[ SerializeField ] ColorSetter tightSpring_bottom_colorSetter;
 
+  [ Title( "Fired Events" ) ]
+	[ SerializeField ] GameEvent event_level_complete;
 // Private
 	List< Spring > spring_list = new List< Spring >( 32 );
 	[ ShowInInspector, ReadOnly ] bool is_finger_down; 
@@ -214,6 +216,9 @@ public class Player : MonoBehaviour
     {
 		body_upper_animator.SetBool( "run", false );
 		body_bottom_animator.SetBool( "run", false );
+
+		if( shared_player_length.sharedValue <= 0 && Mathf.Approximately( notif_player_width.sharedValue , 0 ) )
+			event_level_complete.Raise();
 	}
 #endregion
 

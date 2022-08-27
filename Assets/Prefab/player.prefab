@@ -70,6 +70,7 @@ MonoBehaviour:
   body_bottom_colorSetter: {fileID: 5325322470583750101}
   tightSpring_upper_colorSetter: {fileID: 3140877723892119815}
   tightSpring_bottom_colorSetter: {fileID: 5540961899382209831}
+  event_level_complete: {fileID: 11400000, guid: 28d976b368abc004a924d98b1751a17d, type: 2}
 --- !u!114 &7854451035827296698
 MonoBehaviour:
   m_ObjectHideFlags: 0
