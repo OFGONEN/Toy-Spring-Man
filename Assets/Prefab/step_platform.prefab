@@ -209,8 +209,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2
-  m_fontSizeBase: 2
+  m_fontSize: 1.75
+  m_fontSizeBase: 1.75
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -332,6 +332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0, b: 0, a: 0}
   _renderer: {fileID: 5738854470438970499}
+  is_setOn_Awake: 1
 --- !u!4 &8614736545158481310 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6960863132709088895, guid: 30c1bdee20d786642b60189342d0f647, type: 3}
