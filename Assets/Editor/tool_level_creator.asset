@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256856ab7b19d44a4b4efc31ea53731c, type: 3}
   m_Name: tool_level_creator
   m_EditorClassIdentifier: 
-  ground_count: 0
-  object_finishLine: {fileID: 14768964550572028, guid: 206211c8365b7e147a63fac53258f4b0, type: 3}
+  ground_count: 11
+  object_finishLine: {fileID: 7169710899169753449, guid: 426a339171d9b42d182b61f9041bbc8f, type: 3}
   data_ground:
     ground_object: {fileID: 6890220854897602685, guid: eb32c38b815aa204a9bc7af75dd27582, type: 3}
     ground_length: 5
