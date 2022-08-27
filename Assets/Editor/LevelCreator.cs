@@ -8,13 +8,19 @@ using UnityEngine.SceneManagement;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using FFStudio;
+using TMPro;
 using Sirenix.OdinInspector;
 
 [ CreateAssetMenu( fileName = "tool_level_creator", menuName = "FFEditor/Tool/Level Creator" ) ]
 public class LevelCreator : ScriptableObject
 {
   [ Title( "Setup" ) ]
-    [ SerializeField ] public int ground_count;
+    [ SerializeField ] int ground_count;
+
+  [ Title( "Setup - Final Stage" ) ]
+    [ SerializeField ] Transform finalStage_transform;
+	[ SerializeField ] int finalStage_step_count; 
+	[ SerializeField ] Color[] finalStage_color; 
 
   [ Title( "Data Setup" ) ]
     [ SerializeField ] FinalStageData data_finalStage;
@@ -51,6 +57,47 @@ public class LevelCreator : ScriptableObject
 
 	    AssetDatabase.SaveAssets();
 	}
+
+	[ Button() ]
+	public void EditFinalStage()
+	{
+		EditorSceneManager.MarkAllScenesDirty();
+
+		var finalStageParent = GameObject.Find( "finalStage" ).transform;
+		finalStageParent.DestoryAllChildren();
+
+		int score             = 10;
+		int colorPortionCount = finalStage_step_count / ( finalStage_color.Length - 1 );
+
+		for( var i = 0; i < finalStage_step_count; i++ )
+		{
+			var finalStage = PrefabUtility.InstantiatePrefab( data_stepPlatform.stepPlatform_object ) as GameObject;
+			finalStage.transform.SetParent( finalStageParent );
+			finalStage.transform.localPosition = Vector3.up * ( i * data_stepPlatform.stepPlatform_offset );
+			finalStage.name = data_stepPlatform.stepPlatform_object.name + "_" + i;
+
+			finalStage.GetComponentInChildren< TextMeshProUGUI >().text = "x" + ( score / 10f );
+			score += 1;
+
+			var colorIndex = i / colorPortionCount;
+			var color = Color.Lerp( finalStage_color[ colorIndex ],
+				finalStage_color[ Mathf.Min( colorIndex + 1, finalStage_color.Length ) ],
+				( float ) ( i % colorPortionCount ) / colorPortionCount
+			);
+
+			finalStage.GetComponentInChildren< ColorSetter >().SetColorInEditor( color, true );
+		}
+
+	    AssetDatabase.SaveAssets();
+	}
+
+#if UNITY_EDITOR
+	private void OnValidate()
+	{
+		for( var i = 0; i < finalStage_color.Length; i++ )
+			finalStage_color[ i ] = finalStage_color[ i ].SetAlpha( 1 );
+	}
+#endif
 }
 
 [ Serializable ]

@@ -13,6 +13,16 @@ MonoBehaviour:
   m_Name: tool_level_creator
   m_EditorClassIdentifier: 
   ground_count: 12
+  finalStage_transform: {fileID: 0}
+  finalStage_step_count: 45
+  finalStage_color:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.6392157, b: 0, a: 1}
+  - {r: 1, g: 1, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 0, g: 1, b: 1, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 1, a: 1}
   data_finalStage:
     finalStage_object: {fileID: 8415057627306428255, guid: f3b8b589847964c178a4ea6174bf4348, type: 3}
     finalStage_offset: 2
