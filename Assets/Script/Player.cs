@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [ SerializeField ] SpringValue shared_spring_value;
     [ SerializeField ] SharedVector2 shared_input_drag;
     [ SerializeField ] SharedVector3 shared_levelEnd_position;
+    [ SerializeField ] SharedVector3 shared_finalStage_position;
     [ SerializeField ] SharedFloat shared_player_position_delayed;
 	[ SerializeField ] PoolSpring pool_spring;
 
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour
 
   [ Title( "Fired Events" ) ]
 	[ SerializeField ] GameEvent event_level_complete;
+	[ SerializeField ] GameEvent event_player_reached_finalStage;
 // Private
 	List< Spring > spring_list = new List< Spring >( 32 );
 	[ ShowInInspector, ReadOnly ] bool is_finger_down; 
@@ -52,6 +54,8 @@ public class Player : MonoBehaviour
 		onUpdateMethod = ExtensionMethods.EmptyMethod;
 
 		shared_player_position_delayed.sharedValue = transform.position.x;
+
+		notif_player_width.SetValue_DontNotify( 0 );
 		shared_player_length.SetValue_NotifyAlways( 0 );
 		shared_player_color.ChangeData( CurrentLevelData.Instance.levelData.player_color_data );
 		OnPlayerColorChange();
@@ -220,12 +224,25 @@ public class Player : MonoBehaviour
 
 	void OnEndLevelReached()
     {
+		if( shared_player_length.sharedValue <= 0 && Mathf.Approximately( notif_player_width.sharedValue , 0 ) )
+		{
+			event_level_complete.Raise();
+			return;
+		}
+
+		event_player_reached_finalStage.Raise();
 
 		body_upper_animator.SetTrigger( "jump" );
 		body_bottom_animator.SetTrigger( "jump" );
 
-		if( shared_player_length.sharedValue <= 0 && Mathf.Approximately( notif_player_width.sharedValue , 0 ) )
-			event_level_complete.Raise();
+		// var count = 5;
+
+		// var targetPosition = shared_finalStage_position.sharedValue + 
+		// 	Vector3.forward * GameSettings.Instance.player_jump_offset_step_horizontal * count +
+		// 	Vector3.up * GameSettings.Instance.player_jump_offset_vertical;
+
+		// transform.DOJump( targetPosition, 1, 1, 1 );
+
 	}
 #endregion
 
