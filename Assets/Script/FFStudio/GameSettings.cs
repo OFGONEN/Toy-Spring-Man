@@ -40,6 +40,9 @@ namespace FFStudio
         [ LabelText( "Spring Speed Lateral" ) ] public float spring_speed_lateral;
         [ LabelText( "Spring Spawn Scale" ) ] public float spring_spawn_punch;
         [ LabelText( "Spring Spawn Scale Duration" ) ] public float spring_spawn_punch_duration;
+        [ LabelText( "Spring Drop Force" ) ] public float spring_drop_force;
+        [ LabelText( "Spring Drop Torque" ) ] public float spring_drop_torque;
+        [ LabelText( "Spring Drop Duration" ) ] public float spring_drop_duration;
 
     [ Title( "Spring Low Count" ) ]
         [ LabelText( "Spring Horizontal Low Count" ) ] public int spring_horizontal_lowCount = 8;
