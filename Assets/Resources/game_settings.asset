@@ -18,6 +18,12 @@ MonoBehaviour:
   player_offset_upper_body: 0.788
   player_length_max_pseudo: 30
   player_jump_delay: 1
+  player_jump_offset_vertical: 0
+  player_jump_offset_step_horizontal: 2
+  finalStage_step_rotation_start: 45
+  finalStage_step_rotation_end: 90
+  finalStage_rotation_duration: 0.1
+  finalStage_rotation_ease: 1
   spring_width_max: 1000
   spring_speed_lateral: 5
   spring_spawn_punch: 3

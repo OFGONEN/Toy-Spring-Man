@@ -20,6 +20,14 @@ namespace FFStudio
 
     [ Title( "Player - End Level" ) ]
         [ LabelText( "Player Jump Delay" ) ] public float player_jump_delay = 1f;
+        [ LabelText( "Platform Offset Vertical" ) ] public float player_jump_offset_vertical = 0.2f;
+        [ LabelText( "Platform Offset Step Horizontal" ) ] public float player_jump_offset_step_horizontal = 2f;
+
+    [ Title( "Final Stage - Step" ) ]
+        [ LabelText( "Step Start Rotation" ) ] public float finalStage_step_rotation_start = 45f;
+        [ LabelText( "Step End Rotation" ) ] public float finalStage_step_rotation_end = 90f;
+        [ LabelText( "Step Rotation Duration" ) ] public float finalStage_rotation_duration;
+        [ LabelText( "Step Rotation Ease" ) ] public Ease finalStage_rotation_ease;
 
     [ Title( "Spring" ) ]
         [ LabelText( "Spring Max Width" ) ] public float spring_width_max;
