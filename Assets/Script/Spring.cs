@@ -53,6 +53,11 @@ public class Spring : MonoBehaviour
 #endregion
 
 #region API
+	public void OnLevelFinish()
+	{
+		pool_spring.ReturnEntity( this );
+	}
+
 	public void Spawn( int index, Vector3 spawnPosition, Color color )
 	{
 		player_transform   = notif_player_transform.sharedValue as Transform;
