@@ -97,6 +97,12 @@ public class Player : MonoBehaviour
 
 		sequence.Append( transform.DOMove( shared_levelEnd_position.sharedValue, 1 ) );
 		sequence.Join( transform.DORotate( Vector3.zero, 1 ) );
+		sequence.AppendCallback( () =>
+		{
+			body_upper_animator.SetBool( "run", false );
+			body_bottom_animator.SetBool( "run", false );
+		} );
+		sequence.AppendInterval( GameSettings.Instance.player_jump_delay );
 	}
 
 	public void OnPlayerColorChange()
@@ -214,8 +220,9 @@ public class Player : MonoBehaviour
 
 	void OnEndLevelReached()
     {
-		body_upper_animator.SetBool( "run", false );
-		body_bottom_animator.SetBool( "run", false );
+
+		body_upper_animator.SetTrigger( "jump" );
+		body_bottom_animator.SetTrigger( "jump" );
 
 		if( shared_player_length.sharedValue <= 0 && Mathf.Approximately( notif_player_width.sharedValue , 0 ) )
 			event_level_complete.Raise();
