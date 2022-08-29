@@ -39,19 +39,30 @@ public class Player : MonoBehaviour
 // Private
 	List< Spring > spring_list = new List< Spring >( 32 );
 	[ ShowInInspector, ReadOnly ] bool is_finger_down; 
+	float finalStage_width_loss_speed;
+	float finalStage_index_duration;
+	float finalStage_length_loss_cooldown;
 
     RecycledSequence recycledSequence = new RecycledSequence();
 // Delegates
     UnityMessage onUpdateMethod;
+    UnityMessage onFinalStage;
 #endregion
 
 #region Properties
 #endregion
 
 #region Unity API
+	private void OnDisable()
+	{
+		onUpdateMethod = ExtensionMethods.EmptyMethod;
+		onFinalStage = ExtensionMethods.EmptyMethod;
+	}
+
     private void Awake()
     {
 		onUpdateMethod = ExtensionMethods.EmptyMethod;
+		onFinalStage = ExtensionMethods.EmptyMethod;
 
 		shared_player_position_delayed.sharedValue = transform.position.x;
 
@@ -145,7 +156,13 @@ public class Player : MonoBehaviour
 	public void OnPlayerLength_Lost( IntGameEvent gameEvent )
 	{
 		var index = gameEvent.eventValue;
+		LooseSpring( index );
+	}
+#endregion
 
+#region Implementation
+	void LooseSpring( int index )
+	{
 		spring_list[ index ].DropOff();
 
 		for( var i = index; i < spring_list.Count - 1; i++ )
@@ -165,9 +182,7 @@ public class Player : MonoBehaviour
 			tightSpring_bottom_renderer.enabled = false;
 		}
 	}
-#endregion
 
-#region Implementation
     void OnUpdate_Movement()
     {
 		MoveForward();
@@ -222,6 +237,33 @@ public class Player : MonoBehaviour
 		SetPlayerDelayedPosition();
 	}
 
+	void OnUpdateFinalStage()
+	{
+		SetUpperBodyPosition();
+		SetPlayerDelayedPosition();
+		onFinalStage();
+	}
+	
+	void RemoveWidthAtFinalStage()
+	{
+		notif_player_width.SharedValue -= Time.deltaTime * finalStage_width_loss_speed;
+
+		if( notif_player_width.sharedValue <= 0 )
+		{
+			onFinalStage = RemoveLengthAtFinalStage;
+			finalStage_length_loss_cooldown = Time.time + finalStage_index_duration;
+		}
+	}
+
+	void RemoveLengthAtFinalStage()
+	{
+		if( shared_player_length.sharedValue > 0 && Time.time >= finalStage_length_loss_cooldown )
+		{
+			LooseSpring( Random.Range( 0, shared_player_length.sharedValue ) );
+			finalStage_length_loss_cooldown = Time.time + finalStage_index_duration;
+		}
+	}
+
 	void OnEndLevelReached()
     {
 		if( shared_player_length.sharedValue <= 0 && Mathf.Approximately( notif_player_width.sharedValue , 0 ) )
@@ -242,16 +284,11 @@ public class Player : MonoBehaviour
 		var width = Mathf.FloorToInt( notif_player_width.sharedValue );
 
 		jumpIndex += width / GameSettings.Instance.player_jump_loss_width;
-		FFLogger.Log( "Jump Index: " + jumpIndex );
 
 		if( width % GameSettings.Instance.player_jump_loss_width > 0 )
 			jumpIndex += 1;
 
-		FFLogger.Log( "Jump Index: " + jumpIndex );
-
 		jumpIndex = Mathf.Min( jumpIndex + shared_player_length.sharedValue, GameSettings.Instance.player_jump_index_max );
-
-		FFLogger.Log( "Jump Index: " + jumpIndex );
 
 		float ratio = Mathf.InverseLerp( GameSettings.Instance.player_jump_index_min, 
 			GameSettings.Instance.player_jump_index_max, 
@@ -265,13 +302,26 @@ public class Player : MonoBehaviour
 			Vector3.forward * GameSettings.Instance.player_jump_offset_step_horizontal / 2f + // To place on the center of the step
 			Vector3.up * GameSettings.Instance.player_jump_offset_vertical;
 
-		transform.DOJump( targetPosition, jumpPower, 1, duration ).OnComplete( OnJumpComplete );
+		transform.DOJump( targetPosition, jumpPower, 1, duration ).SetEase( Ease.Linear ).OnComplete( OnFinalStageJumpComplete );
+
+		finalStage_index_duration = duration / jumpIndex;
+
+		finalStage_width_loss_speed = GameSettings.Instance.player_jump_loss_width / finalStage_index_duration;
+
+		onUpdateMethod = OnUpdateFinalStage;
+
+		if( notif_player_width.sharedValue > 0 )
+			onFinalStage = RemoveWidthAtFinalStage;
+		else
+			onFinalStage = RemoveLengthAtFinalStage;
 	}
 
-	void OnJumpComplete()
+	void OnFinalStageJumpComplete()
 	{
 		body_upper_animator.SetTrigger( "victory" );
 		body_bottom_animator.SetTrigger( "victory" );
+
+		onFinalStage = ExtensionMethods.EmptyMethod;
 
 		event_level_complete.Raise();
 	}

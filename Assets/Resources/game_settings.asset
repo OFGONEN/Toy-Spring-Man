@@ -19,7 +19,7 @@ MonoBehaviour:
   player_length_max_pseudo: 30
   player_jump_delay: 1
   player_jump_power: {x: 1, y: 3}
-  player_jump_duration: {x: 1, y: 3}
+  player_jump_duration: {x: 2, y: 5}
   player_jump_index_min: 5
   player_jump_index_max: 40
   player_jump_loss_width: 200
