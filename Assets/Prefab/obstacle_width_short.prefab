@@ -81,8 +81,40 @@ PrefabInstance:
       value: obstacle_width_short
       objectReference: {fileID: 0}
     - target: {fileID: 4923825105333929365, guid: 43216a024686c473a8ba0a493bd48b0b, type: 3}
+      propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923825105333929365, guid: 43216a024686c473a8ba0a493bd48b0b, type: 3}
+      propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923825105333929365, guid: 43216a024686c473a8ba0a493bd48b0b, type: 3}
+      propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: a5edacec3496d4c5f9e94958dd3b9adf, type: 2}
+    - target: {fileID: 4923825105333929365, guid: 43216a024686c473a8ba0a493bd48b0b, type: 3}
+      propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923825105333929365, guid: 43216a024686c473a8ba0a493bd48b0b, type: 3}
+      propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Raise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923825105333929365, guid: 43216a024686c473a8ba0a493bd48b0b, type: 3}
+      propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: FFStudio.IntGameEvent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923825105333929365, guid: 43216a024686c473a8ba0a493bd48b0b, type: 3}
+      propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923825105333929365, guid: 43216a024686c473a8ba0a493bd48b0b, type: 3}
       propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923825105333929365, guid: 43216a024686c473a8ba0a493bd48b0b, type: 3}
+      propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6343003902133280941, guid: 43216a024686c473a8ba0a493bd48b0b, type: 3}
       propertyPath: m_RootOrder
