@@ -64,7 +64,7 @@ public class LevelCreator : ScriptableObject
 		EditorSceneManager.MarkAllScenesDirty();
 
 		var finalStageParent = GameObject.Find( "finalStage" ).transform;
-		finalStageParent.DestoryAllChildren();
+		// finalStageParent.DestoryAllChildren();
 
 		int score             = 10;
 		int colorPortionCount = finalStage_step_count / ( finalStage_color.Length - 1 );
@@ -73,7 +73,8 @@ public class LevelCreator : ScriptableObject
 		{
 			var finalStage = PrefabUtility.InstantiatePrefab( data_stepPlatform.stepPlatform_object ) as GameObject;
 			finalStage.transform.SetParent( finalStageParent );
-			finalStage.transform.localPosition = Vector3.up * ( i * data_stepPlatform.stepPlatform_offset );
+			finalStage.transform.localPosition = Vector3.forward * ( i * data_stepPlatform.stepPlatform_offset );
+			finalStage.transform.localEulerAngles = Vector3.right * data_stepPlatform.stepPlatform_rotate;
 			finalStage.name = data_stepPlatform.stepPlatform_object.name + "_" + i;
 
 			finalStage.GetComponentInChildren< TextMeshProUGUI >().text = "x" + ( score / 10f );
@@ -126,4 +127,5 @@ public struct StepPlatformData
 {
 	public GameObject stepPlatform_object;
     public float stepPlatform_offset;
+    public float stepPlatform_rotate;
 }
