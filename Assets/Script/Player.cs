@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [ SerializeField ] SpringValue shared_spring_value;
     [ SerializeField ] SharedVector2 shared_input_drag;
     [ SerializeField ] SharedVector3 shared_levelEnd_position;
+    [ SerializeField ] SharedVector3 shared_finalStage_position;
     [ SerializeField ] SharedFloat shared_player_position_delayed;
 	[ SerializeField ] PoolSpring pool_spring;
 
@@ -34,24 +35,38 @@ public class Player : MonoBehaviour
 
   [ Title( "Fired Events" ) ]
 	[ SerializeField ] GameEvent event_level_complete;
+	[ SerializeField ] GameEvent event_player_reached_finalStage;
 // Private
 	List< Spring > spring_list = new List< Spring >( 32 );
 	[ ShowInInspector, ReadOnly ] bool is_finger_down; 
+	float finalStage_width_loss_speed;
+	float finalStage_index_duration;
+	float finalStage_length_loss_cooldown;
 
     RecycledSequence recycledSequence = new RecycledSequence();
 // Delegates
     UnityMessage onUpdateMethod;
+    UnityMessage onFinalStage;
 #endregion
 
 #region Properties
 #endregion
 
 #region Unity API
+	private void OnDisable()
+	{
+		onUpdateMethod = ExtensionMethods.EmptyMethod;
+		onFinalStage = ExtensionMethods.EmptyMethod;
+	}
+
     private void Awake()
     {
 		onUpdateMethod = ExtensionMethods.EmptyMethod;
+		onFinalStage = ExtensionMethods.EmptyMethod;
 
 		shared_player_position_delayed.sharedValue = transform.position.x;
+
+		notif_player_width.SetValue_DontNotify( 0 );
 		shared_player_length.SetValue_NotifyAlways( 0 );
 		shared_player_color.ChangeData( CurrentLevelData.Instance.levelData.player_color_data );
 		OnPlayerColorChange();
@@ -97,6 +112,12 @@ public class Player : MonoBehaviour
 
 		sequence.Append( transform.DOMove( shared_levelEnd_position.sharedValue, 1 ) );
 		sequence.Join( transform.DORotate( Vector3.zero, 1 ) );
+		sequence.AppendCallback( () =>
+		{
+			body_upper_animator.SetBool( "run", false );
+			body_bottom_animator.SetBool( "run", false );
+		} );
+		sequence.AppendInterval( GameSettings.Instance.player_jump_delay );
 	}
 
 	public void OnPlayerColorChange()
@@ -135,7 +156,13 @@ public class Player : MonoBehaviour
 	public void OnPlayerLength_Lost( IntGameEvent gameEvent )
 	{
 		var index = gameEvent.eventValue;
+		LooseSpring( index );
+	}
+#endregion
 
+#region Implementation
+	void LooseSpring( int index )
+	{
 		spring_list[ index ].DropOff();
 
 		for( var i = index; i < spring_list.Count - 1; i++ )
@@ -155,9 +182,7 @@ public class Player : MonoBehaviour
 			tightSpring_bottom_renderer.enabled = false;
 		}
 	}
-#endregion
 
-#region Implementation
     void OnUpdate_Movement()
     {
 		MoveForward();
@@ -212,13 +237,93 @@ public class Player : MonoBehaviour
 		SetPlayerDelayedPosition();
 	}
 
+	void OnUpdateFinalStage()
+	{
+		SetUpperBodyPosition();
+		SetPlayerDelayedPosition();
+		onFinalStage();
+	}
+	
+	void RemoveWidthAtFinalStage()
+	{
+		notif_player_width.SharedValue -= Time.deltaTime * finalStage_width_loss_speed;
+
+		if( notif_player_width.sharedValue <= 0 )
+		{
+			onFinalStage = RemoveLengthAtFinalStage;
+			finalStage_length_loss_cooldown = Time.time + finalStage_index_duration;
+		}
+	}
+
+	void RemoveLengthAtFinalStage()
+	{
+		if( shared_player_length.sharedValue > 0 && Time.time >= finalStage_length_loss_cooldown )
+		{
+			LooseSpring( Random.Range( 0, shared_player_length.sharedValue ) );
+			finalStage_length_loss_cooldown = Time.time + finalStage_index_duration;
+		}
+	}
+
 	void OnEndLevelReached()
     {
-		body_upper_animator.SetBool( "run", false );
-		body_bottom_animator.SetBool( "run", false );
-
 		if( shared_player_length.sharedValue <= 0 && Mathf.Approximately( notif_player_width.sharedValue , 0 ) )
+		{
 			event_level_complete.Raise();
+			return;
+		}
+
+		event_player_reached_finalStage.Raise();
+
+		body_upper_animator.SetTrigger( "jump" );
+		body_bottom_animator.SetTrigger( "jump" );
+
+		int   jumpIndex = 0;
+		float duration  = 0;
+		float jumpPower = 0;
+
+		var width = Mathf.FloorToInt( notif_player_width.sharedValue );
+
+		jumpIndex += width / GameSettings.Instance.player_jump_loss_width;
+
+		if( width % GameSettings.Instance.player_jump_loss_width > 0 )
+			jumpIndex += 1;
+
+		jumpIndex = Mathf.Min( jumpIndex + shared_player_length.sharedValue, GameSettings.Instance.player_jump_index_max );
+
+		float ratio = Mathf.InverseLerp( GameSettings.Instance.player_jump_index_min, 
+			GameSettings.Instance.player_jump_index_max, 
+			Mathf.Max( GameSettings.Instance.player_jump_index_min, jumpIndex ) );
+
+		duration = GameSettings.Instance.player_jump_duration.ReturnProgress( ratio );
+		jumpPower = GameSettings.Instance.player_jump_power.ReturnProgress( ratio );
+
+		var targetPosition = shared_finalStage_position.sharedValue + 
+			Vector3.forward * GameSettings.Instance.player_jump_offset_step_horizontal * jumpIndex +
+			Vector3.forward * GameSettings.Instance.player_jump_offset_step_horizontal / 2f + // To place on the center of the step
+			Vector3.up * GameSettings.Instance.player_jump_offset_vertical;
+
+		transform.DOJump( targetPosition, jumpPower, 1, duration ).SetEase( Ease.Linear ).OnComplete( OnFinalStageJumpComplete );
+
+		finalStage_index_duration = duration / jumpIndex;
+
+		finalStage_width_loss_speed = GameSettings.Instance.player_jump_loss_width / finalStage_index_duration;
+
+		onUpdateMethod = OnUpdateFinalStage;
+
+		if( notif_player_width.sharedValue > 0 )
+			onFinalStage = RemoveWidthAtFinalStage;
+		else
+			onFinalStage = RemoveLengthAtFinalStage;
+	}
+
+	void OnFinalStageJumpComplete()
+	{
+		body_upper_animator.SetTrigger( "victory" );
+		body_bottom_animator.SetTrigger( "victory" );
+
+		onFinalStage = ExtensionMethods.EmptyMethod;
+
+		event_level_complete.Raise();
 	}
 #endregion
 

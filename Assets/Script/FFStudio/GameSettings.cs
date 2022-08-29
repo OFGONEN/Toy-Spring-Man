@@ -18,6 +18,23 @@ namespace FFStudio
         [ LabelText( "Player Upper Body Offset" ) ] public float player_offset_upper_body = 2f;
         [ LabelText( "Player Pseudo Max Length" ) ] public int player_length_max_pseudo = 30;
 
+    [ Title( "Player - End Level" ) ]
+        [ LabelText( "Player Jump Delay" ) ] public float player_jump_delay = 1f;
+        [ LabelText( "Player Jump Power" ) ] public Vector2 player_jump_power;
+        [ LabelText( "Player Jump Duration" ) ] public Vector2 player_jump_duration;
+        [ LabelText( "Player Jump Min Index" ) ] public int player_jump_index_min = 5;
+        [ LabelText( "Player Jump Min Index" ) ] public int player_jump_index_max = 40;
+        [ LabelText( "Player Width Loss By Index" ) ] public int player_jump_loss_width = 200;
+        [ LabelText( "Player Length Loss By Index" ) ] public int player_jump_loss_length = 1;
+        [ LabelText( "Platform Offset Vertical" ) ] public float player_jump_offset_vertical = 0.2f;
+        [ LabelText( "Platform Offset Step Horizontal" ) ] public float player_jump_offset_step_horizontal = 2f;
+
+    [ Title( "Final Stage - Step" ) ]
+        [ LabelText( "Step Start Rotation" ) ] public float finalStage_step_rotation_start = 45f;
+        [ LabelText( "Step End Rotation" ) ] public float finalStage_step_rotation_end = 90f;
+        [ LabelText( "Step Rotation Duration" ) ] public float finalStage_rotation_duration;
+        [ LabelText( "Step Rotation Ease" ) ] public Ease finalStage_rotation_ease;
+
     [ Title( "Spring" ) ]
         [ LabelText( "Spring Max Width" ) ] public float spring_width_max;
         [ LabelText( "Spring Speed Lateral" ) ] public float spring_speed_lateral;

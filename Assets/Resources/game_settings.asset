@@ -12,11 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a385bd3b4416492409284c9a366cb52a, type: 3}
   m_Name: game_settings
   m_EditorClassIdentifier: 
-  player_movement_speed_forward: 2
+  player_movement_speed_forward: 5
   player_movement_speed_lateral: 0.1
   player_movement_clamp_lateral: 3
   player_offset_upper_body: 0.788
   player_length_max_pseudo: 30
+  player_jump_delay: 1
+  player_jump_power: {x: 1, y: 3}
+  player_jump_duration: {x: 2, y: 5}
+  player_jump_index_min: 5
+  player_jump_index_max: 40
+  player_jump_loss_width: 200
+  player_jump_loss_length: 1
+  player_jump_offset_vertical: 0.2
+  player_jump_offset_step_horizontal: 2
+  finalStage_step_rotation_start: 45
+  finalStage_step_rotation_end: 90
+  finalStage_rotation_duration: 0.1
+  finalStage_rotation_ease: 1
   spring_width_max: 1000
   spring_speed_lateral: 5
   spring_spawn_punch: 3
