@@ -235,14 +235,45 @@ public class Player : MonoBehaviour
 		body_upper_animator.SetTrigger( "jump" );
 		body_bottom_animator.SetTrigger( "jump" );
 
-		// var count = 5;
+		int   jumpIndex = 0;
+		float duration  = 0;
+		float jumpPower = 0;
 
-		// var targetPosition = shared_finalStage_position.sharedValue + 
-		// 	Vector3.forward * GameSettings.Instance.player_jump_offset_step_horizontal * count +
-		// 	Vector3.up * GameSettings.Instance.player_jump_offset_vertical;
+		var width = Mathf.FloorToInt( notif_player_width.sharedValue );
 
-		// transform.DOJump( targetPosition, 1, 1, 1 );
+		jumpIndex += width / GameSettings.Instance.player_jump_loss_width;
+		FFLogger.Log( "Jump Index: " + jumpIndex );
 
+		if( width % GameSettings.Instance.player_jump_loss_width > 0 )
+			jumpIndex += 1;
+
+		FFLogger.Log( "Jump Index: " + jumpIndex );
+
+		jumpIndex = Mathf.Min( jumpIndex + shared_player_length.sharedValue, GameSettings.Instance.player_jump_index_max );
+
+		FFLogger.Log( "Jump Index: " + jumpIndex );
+
+		float ratio = Mathf.InverseLerp( GameSettings.Instance.player_jump_index_min, 
+			GameSettings.Instance.player_jump_index_max, 
+			Mathf.Max( GameSettings.Instance.player_jump_index_min, jumpIndex ) );
+
+		duration = GameSettings.Instance.player_jump_duration.ReturnProgress( ratio );
+		jumpPower = GameSettings.Instance.player_jump_power.ReturnProgress( ratio );
+
+		var targetPosition = shared_finalStage_position.sharedValue + 
+			Vector3.forward * GameSettings.Instance.player_jump_offset_step_horizontal * jumpIndex +
+			Vector3.forward * GameSettings.Instance.player_jump_offset_step_horizontal / 2f + // To place on the center of the step
+			Vector3.up * GameSettings.Instance.player_jump_offset_vertical;
+
+		transform.DOJump( targetPosition, jumpPower, 1, duration ).OnComplete( OnJumpComplete );
+	}
+
+	void OnJumpComplete()
+	{
+		body_upper_animator.SetTrigger( "victory" );
+		body_bottom_animator.SetTrigger( "victory" );
+
+		event_level_complete.Raise();
 	}
 #endregion
 
