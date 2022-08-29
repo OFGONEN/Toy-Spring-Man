@@ -95,9 +95,6 @@ public class Spring : MonoBehaviour
 
 	public void DropOff()
 	{
-		FFLogger.Log( "Drop Off", gameObject );
-		// Debug.Break();
-
 		onUpdateMethod = ExtensionMethods.EmptyMethod;
 
 		_rigidbody.isKinematic = false;
