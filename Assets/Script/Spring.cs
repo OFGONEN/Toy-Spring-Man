@@ -17,7 +17,10 @@ public class Spring : MonoBehaviour
 	[ SerializeField ] SharedFloat shared_player_position_delayed;
 	[ SerializeField ] SharedReferenceNotifier notif_player_transform;
 	[ SerializeField ] PoolSpring pool_spring;
+
+  [ Title( "Fired Events" ) ]
 	[ SerializeField ] IntGameEvent event_player_length_lost;
+	[ SerializeField ] ParticleSpawnEvent event_particle_spawn;
 
   [ Title( "Components" ) ]
     [ SerializeField ] Rigidbody _rigidbody;
@@ -86,6 +89,8 @@ public class Spring : MonoBehaviour
 		transform.DOScaleZ( 1, GameSettings.Instance.spring_spawn_punch_duration );
 
 		onUpdateMethod = OnUpdate;
+
+		// event_particle_spawn.Raise( "spring_gained", spawnPosition, player_transform );
 	}
 
 	public void OnTrigger()
