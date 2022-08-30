@@ -17,9 +17,13 @@ public class Spring : MonoBehaviour
 	[ SerializeField ] SharedFloat shared_player_position_delayed;
 	[ SerializeField ] SharedReferenceNotifier notif_player_transform;
 	[ SerializeField ] PoolSpring pool_spring;
+
+  [ Title( "Fired Events" ) ]
 	[ SerializeField ] IntGameEvent event_player_length_lost;
+	[ SerializeField ] ParticleSpawnEvent event_particle_spawn;
 
   [ Title( "Components" ) ]
+    [ SerializeField ] Rigidbody _rigidbody;
     [ SerializeField ] Collider _collider;
     [ SerializeField ] SkinnedMeshRenderer _skinRenderer;
     [ SerializeField ] ColorSetter colorSetter;
@@ -28,7 +32,9 @@ public class Spring : MonoBehaviour
 	[ ShowInInspector, ReadOnly ] int spring_index;
 	Transform player_transform;
 
-// Delegates
+	RecycledTween recycledTween = new RecycledTween();
+
+	// Delegates
 	UnityMessage onUpdateMethod;
 #endregion
 
@@ -39,6 +45,9 @@ public class Spring : MonoBehaviour
 	private void Awake()
 	{
 		onUpdateMethod = ExtensionMethods.EmptyMethod;
+
+		_rigidbody.isKinematic = true;
+		_rigidbody.useGravity  = false;
 	}
 
 	private void OnDisable()
@@ -53,13 +62,23 @@ public class Spring : MonoBehaviour
 #endregion
 
 #region API
+	public void OnLevelFinish()
+	{
+		recycledTween.Kill();
+		OnDropDone();
+	}
+
 	public void Spawn( int index, Vector3 spawnPosition, Color color )
 	{
 		player_transform   = notif_player_transform.sharedValue as Transform;
 		spring_index = index;
 
 		transform.position = spawnPosition;
-		_collider.enabled = true;
+		transform.rotation = Quaternion.identity;
+		_collider.enabled  = true;
+
+		_rigidbody.isKinematic = true;
+		_rigidbody.useGravity  = false;
 
 		OnUpdate();
 		OnColorChange( color );
@@ -70,6 +89,8 @@ public class Spring : MonoBehaviour
 		transform.DOScaleZ( 1, GameSettings.Instance.spring_spawn_punch_duration );
 
 		onUpdateMethod = OnUpdate;
+
+		// event_particle_spawn.Raise( "spring_gained", spawnPosition, player_transform );
 	}
 
 	public void OnTrigger()
@@ -79,8 +100,15 @@ public class Spring : MonoBehaviour
 
 	public void DropOff()
 	{
-		pool_spring.ReturnEntity( this );
-		//todo spawn particle
+		onUpdateMethod = ExtensionMethods.EmptyMethod;
+
+		_rigidbody.isKinematic = false;
+		_rigidbody.useGravity  = true;
+
+		_rigidbody.AddForce( ( Random.onUnitSphere + Vector3.back + Vector3.up ).normalized * GameSettings.Instance.spring_drop_force, ForceMode.Impulse );
+		_rigidbody.AddTorque( Random.onUnitSphere * GameSettings.Instance.spring_drop_force, ForceMode.Impulse );
+
+		recycledTween.Recycle( DOVirtual.DelayedCall( GameSettings.Instance.spring_drop_duration, OnDropDone ) );
 	}
 
 	public void FallOff( int index )
@@ -107,6 +135,15 @@ public class Spring : MonoBehaviour
 #endregion
 
 #region Implementation
+	void OnDropDone()
+	{
+		_rigidbody.velocity    = Vector3.zero;
+		_rigidbody.isKinematic = true;
+		_rigidbody.useGravity  = false;
+
+		pool_spring.ReturnEntity( this );
+	}
+
 	void OnUpdate()
 	{
 		var scaleChange = shared_spring_value.sharedValue * GameSettings.Instance.spring_offset_scale.ReturnProgress( notif_player_width.Ratio );

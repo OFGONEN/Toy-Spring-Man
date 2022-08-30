@@ -19,12 +19,19 @@ public class WidthGate : MonoBehaviour
 
   [ Title( "Components" ) ]
     [ SerializeField ] TextMeshProUGUI _text;
+    [ SerializeField ] ColorSetter colorSetter;
+    [ SerializeField ] ParticleSystem _particleSystem;
 #endregion
 
 #region Properties
 #endregion
 
 #region Unity API
+	private void Start()
+	{
+		if( data_positive )
+			ChangeColor( CurrentLevelData.Instance.levelData.player_color_data.Color );
+	}
 #endregion
 
 #region API
@@ -38,11 +45,17 @@ public class WidthGate : MonoBehaviour
 
     public void OnPlayerColorChange( ColorData colorData )
     {
-
-    }
+		ChangeColor( colorData.Color );
+	}
 #endregion
 
 #region Implementation
+	void ChangeColor( Color color )
+	{
+		colorSetter.SetColor( color );
+		var main = _particleSystem.main;
+		main.startColor = color;
+	}
 #endregion
 
 #region Editor Only

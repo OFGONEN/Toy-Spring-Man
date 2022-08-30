@@ -74,18 +74,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 5090903514558249624}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &5090903514558249624
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,6 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data_color: {fileID: 0}
   data_value: 1
+  shared_player_length: {fileID: 11400000, guid: e68282049a1ff45f4a5d221dccb275c2, type: 2}
   data_color_player: {fileID: 11400000, guid: 18f5b34fea0e0435ab7cbda0feace9eb, type: 2}
   event_player_length_gained: {fileID: 11400000, guid: dc1446da0e0fb4cd3af15c7c82c0abbe, type: 2}
   event_player_length_lost: {fileID: 11400000, guid: 0b9a30590a29546f792f8c6a1dceac1a, type: 2}

@@ -11,6 +11,7 @@ namespace FFStudio
     [ Title( "Setup" ) ]
 		[ SerializeField ] Color color;
 		[ SerializeField ] Renderer _renderer;
+		[ SerializeField ] bool is_setOn_Awake;
 
 		static int SHADER_ID_COLOR = Shader.PropertyToID( "_BaseColor" );
 
@@ -24,6 +25,9 @@ namespace FFStudio
 		void Awake()
 		{
 			propertyBlock = new MaterialPropertyBlock();
+
+			if( is_setOn_Awake )
+				SetColor();
 		}
 #endregion
 
@@ -57,6 +61,18 @@ namespace FFStudio
 
 #region Editor Only
 #if UNITY_EDITOR
+		[ Button ]
+		public void SetColorInEditor( Color color, bool setOnAwake ) // Info: This may be more "Unity-Event-friendly".
+		{
+			is_setOn_Awake = setOnAwake;
+
+			propertyBlock = new MaterialPropertyBlock();
+			this.color    = color;
+
+			_renderer.GetPropertyBlock( propertyBlock );
+			propertyBlock.SetColor( SHADER_ID_COLOR, color );
+			_renderer.SetPropertyBlock( propertyBlock );
+		}
 #endif
 #endregion
 	}
