@@ -36,7 +36,7 @@ public class LevelCreator : ScriptableObject
     // [ SerializeField ] FinalStageData data_finalStage;
 
 	[ Button() ]
-	public void PlaceCollectables()
+	public void PlaceCollectableLine()
 	{
 		EditorSceneManager.MarkAllScenesDirty();
 		var collectableParent = GameObject.Find( "collectables" ).transform;
@@ -48,6 +48,38 @@ public class LevelCreator : ScriptableObject
 			collectable.SetParent( collectableParent );
 			collectable.position = collectable_origin.position + Vector3.forward * i * data_collectable.collectable_offset;
 		}
+
+	    AssetDatabase.SaveAssets();
+	}
+
+	[ Button() ]
+	public void PlaceCollectableDiagonal( float sign, float offset )
+	{
+		EditorSceneManager.MarkAllScenesDirty();
+		var collectableParent = GameObject.Find( "collectables" ).transform;
+
+		for( var i = 0; i < collectable_count; i++ )
+		{
+			var collectable = data_collectable.ReturnCollectable( collectable_type ).transform;
+
+			collectable.SetParent( collectableParent );
+			collectable.position = collectable_origin.position + 
+				Vector3.forward * i * data_collectable.collectable_offset +
+				Vector3.right * sign * i * offset;
+		}
+
+		AssetDatabase.SaveAssets();
+	}
+
+	[ Button() ]
+	public void PlaceCollectable()
+	{
+		EditorSceneManager.MarkAllScenesDirty();
+		var collectableParent = GameObject.Find( "collectables" ).transform;
+
+		var collectable = data_collectable.ReturnCollectable( collectable_type ).transform;
+			collectable.SetParent( collectableParent );
+			collectable.position = collectable_origin.position;
 
 	    AssetDatabase.SaveAssets();
 	}
