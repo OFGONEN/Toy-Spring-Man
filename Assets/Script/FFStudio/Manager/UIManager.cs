@@ -76,14 +76,14 @@ namespace FFStudio
 								.Append( loadingScreenImage.DOFade( 0, GameSettings.Instance.ui_Entity_Fade_TweenDuration ) )
 								.AppendCallback( () => tapInputListener.response = StartLevel );
 
-			level_count_text.text = "Level " + CurrentLevelData.Instance.currentLevel_Shown;
+			level_count_text.text = CurrentLevelData.Instance.currentLevel_Shown.ToString();
 
             levelLoadedResponse.response = NewLevelLoaded;
         }
 
         private void NewLevelLoaded()
         {
-			level_count_text.text = "Level " + CurrentLevelData.Instance.currentLevel_Shown;
+			level_count_text.text = CurrentLevelData.Instance.currentLevel_Shown.ToString();
 
 			level_information_text.text = "Tap to Start";
 
