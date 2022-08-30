@@ -14,8 +14,13 @@ using Sirenix.OdinInspector;
 [ CreateAssetMenu( fileName = "tool_level_creator", menuName = "FFEditor/Tool/Level Creator" ) ]
 public class LevelCreator : ScriptableObject
 {
-  [ Title( "Setup" ) ]
+  [ Title( "Setup Ground" ) ]
     [ SerializeField ] int ground_count;
+
+  [ Title( "Setup Collectable" ) ]
+    [ SerializeField ] Transform collectable_origin;
+    [ SerializeField ] int collectable_count;
+    [ SerializeField ] CollectableType collectable_type;
 
   [ Title( "Setup - Final Stage" ) ]
     [ SerializeField ] Transform finalStage_transform;
@@ -27,7 +32,25 @@ public class LevelCreator : ScriptableObject
     [ SerializeField ] FinishLineData data_finishLine;
     [ SerializeField ] GroundData data_ground;
     [ SerializeField ] StepPlatformData data_stepPlatform; 
+    [ SerializeField ] CollectableData data_collectable; 
     // [ SerializeField ] FinalStageData data_finalStage;
+
+	[ Button() ]
+	public void PlaceCollectables()
+	{
+		EditorSceneManager.MarkAllScenesDirty();
+		var collectableParent = GameObject.Find( "collectables" ).transform;
+
+		for( var i = 0; i < collectable_count; i++ )
+		{
+			var collectable = data_collectable.ReturnCollectable( collectable_type ).transform;
+
+			collectable.SetParent( collectableParent );
+			collectable.position = collectable_origin.position + Vector3.forward * i * data_collectable.collectable_offset;
+		}
+
+	    AssetDatabase.SaveAssets();
+	}
 
     [ Button() ]
     public void CreateEnvironment()
@@ -128,4 +151,23 @@ public struct StepPlatformData
 	public GameObject stepPlatform_object;
     public float stepPlatform_offset;
     public float stepPlatform_rotate;
+}
+
+[Serializable]
+public struct CollectableData
+{
+	[ SerializeField ] GameObject[] collectable_object_array;
+	public float collectable_offset;
+
+	public GameObject ReturnCollectable( CollectableType type )
+	{
+		return PrefabUtility.InstantiatePrefab( collectable_object_array[ ( int )type ] ) as GameObject;
+	}
+}
+
+public enum CollectableType
+{
+	Blue,
+	Green,
+	Orange
 }
