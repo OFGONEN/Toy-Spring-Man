@@ -24,6 +24,7 @@ namespace FFStudio
         public UI_Patrol_Scale level_information_text_Scale;
         public Image loadingScreenImage;
         public Image foreGroundImage;
+        public RectTransform tapToStart;
         public RectTransform tutorial_hand;
         public RectTransform tutorialObjects;
 
@@ -62,7 +63,7 @@ namespace FFStudio
             levelCompleteResponse.response = LevelCompleteResponse;
             tapInputListener.response      = ExtensionMethods.EmptyMethod;
 
-			level_information_text.text = "Tap to Start";
+			level_information_text.text = string.Empty;
 
 			recycledTween_Tutorial.Recycle( tutorial_hand.DOAnchorPos( Vector2.up * tutorial_hand.anchoredPosition.y, 1 ).SetLoops( -1, LoopType.Yoyo ) );
 		}
@@ -85,7 +86,7 @@ namespace FFStudio
         {
 			level_count_text.text = CurrentLevelData.Instance.currentLevel_Shown.ToString();
 
-			level_information_text.text = "Tap to Start";
+			level_information_text.text = string.Empty;
 
 			var sequence = DOTween.Sequence();
 
@@ -94,6 +95,7 @@ namespace FFStudio
 			sequence.Append( foreGroundImage.DOFade( 0.0f, GameSettings.Instance.ui_Entity_Fade_TweenDuration ) )
 					// .Append( tween ) // TODO: UIElements tween.
 					.Append( level_information_text_Scale.DoScale_Start( GameSettings.Instance.ui_Entity_Scale_TweenDuration ) )
+					.Join( tapToStart.DOScale( Vector3.one, GameSettings.Instance.ui_Entity_Scale_TweenDuration ) )
 					.AppendCallback( () => tapInputListener.response = StartLevel );
 
             // elephantLevelEvent.level             = CurrentLevelData.Instance.currentLevel_Shown;
@@ -143,6 +145,8 @@ namespace FFStudio
 			foreGroundImage.DOFade( 0, GameSettings.Instance.ui_Entity_Fade_TweenDuration );
 
 			level_information_text_Scale.DoScale_Target( Vector3.zero, GameSettings.Instance.ui_Entity_Scale_TweenDuration );
+
+			tapToStart.DOScale( Vector3.zero, GameSettings.Instance.ui_Entity_Scale_TweenDuration );
 
 			level_information_text_Scale.Subscribe_OnComplete( () =>
 			    {
