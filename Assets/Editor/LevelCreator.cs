@@ -131,6 +131,29 @@ public class LevelCreator : ScriptableObject
 		AssetDatabase.SaveAssets();
 	}
 
+	[ Button() ]
+	public void MirrorTheLevel()
+	{
+		EditorSceneManager.MarkAllScenesDirty();
+		var collectableParent = GameObject.Find( "collectables" ).transform;
+		collectables_created.Clear();
+
+		for( var i = 0; i < collectableParent.childCount; i++ )
+		{
+			var childCollectable = collectableParent.GetChild( i );
+			CollectableType childType = ReturnCollectableType( childCollectable.name );
+			var newType = ( ( int )childType + 1 ) % 3;
+
+			var collectable = data_collectable.ReturnCollectable( ( CollectableType )newType ).transform;
+			collectable.position = childCollectable.position.SetX( childCollectable.position.x * -1f );
+
+			collectables_created.Add( collectable.gameObject );
+		}
+
+		// collectableParent.DestoryAllChildren();
+		AssetDatabase.SaveAssets();
+	}
+
     [ Button() ]
     public void CreateEnvironment()
     {
@@ -192,6 +215,18 @@ public class LevelCreator : ScriptableObject
 		}
 
 	    AssetDatabase.SaveAssets();
+	}
+
+	private CollectableType ReturnCollectableType( string name )
+	{
+		if( name.Contains( "collectable_blue" ) )
+			return CollectableType.Blue;
+		else if( name.Contains( "collectable_green" ) )
+			return CollectableType.Green;
+		else if( name.Contains( "collectable_orange" ) )
+			return CollectableType.Orange;
+		else
+			return CollectableType.Orange;
 	}
 
 #if UNITY_EDITOR
