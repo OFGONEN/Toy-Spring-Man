@@ -63,6 +63,24 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventListener:
+      gameEvents:
+      - {fileID: 11400000, guid: 17dfed63164184728ab4c616d6ff0d80, type: 2}
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6495947959784336182}
+          m_TargetAssemblyTypeName: FFStudio.CameraFollow, Assembly-CSharp
+          m_MethodName: OnLevelEnd
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3747325266785291023
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +231,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notif_player_transform: {fileID: 11400000, guid: 8ec4b4aa73cbe412890f58b61d9c878b, type: 2}
   shared_camera_offset_ratio: {fileID: 11400000, guid: 783ee32a24171449691249b01da9011c, type: 2}
-  shared_player_length: {fileID: 11400000, guid: e68282049a1ff45f4a5d221dccb275c2, type: 2}
 --- !u!114 &4772462419648241268
 MonoBehaviour:
   m_ObjectHideFlags: 0
