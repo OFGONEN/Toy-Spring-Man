@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ea3c0b9fd00fd441b6cebc5941ee13b, type: 3}
   m_Name: level_data_4
   m_EditorClassIdentifier: 
-  scene_index: 4
+  scene_index: 5
   scene_overrideAsActiveScene: 0
   player_color_data: {fileID: 11400000, guid: 2bd8b291a5ce04c6d88dfaafbdf04cdb, type: 2}
