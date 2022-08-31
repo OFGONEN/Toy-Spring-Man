@@ -10,6 +10,8 @@ public class FInalStageStep : MonoBehaviour
 {
 #region Fields
     [ SerializeField ] SharedReferenceNotifier notif_player_transform;
+    [ SerializeField ] Transform target_transform;
+    [ SerializeField ] ParticleSystem _particleSystem;
 
     UnityMessage onUpdateMethod;
     Transform player_transform;
@@ -29,7 +31,7 @@ public class FInalStageStep : MonoBehaviour
     private void Awake()
     {
 		onUpdateMethod = ExtensionMethods.EmptyMethod;
-        transform.localEulerAngles = Vector3.right * GameSettings.Instance.finalStage_step_rotation_start;
+        target_transform.localEulerAngles = Vector3.right * GameSettings.Instance.finalStage_step_rotation_start;
 	}
 
     private void Update()
@@ -62,9 +64,11 @@ public class FInalStageStep : MonoBehaviour
     {
 		onUpdateMethod = ExtensionMethods.EmptyMethod;
 
-		recycledTween.Recycle( transform.DORotate( Vector3.right * GameSettings.Instance.finalStage_step_rotation_end,
+		recycledTween.Recycle( target_transform.DORotate( Vector3.right * GameSettings.Instance.finalStage_step_rotation_end,
 			GameSettings.Instance.finalStage_rotation_duration )
 			.SetEase( GameSettings.Instance.finalStage_rotation_ease ) );
+
+		_particleSystem.Play( true );
 	}
 #endregion
 
