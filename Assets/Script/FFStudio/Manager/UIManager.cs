@@ -28,6 +28,7 @@ namespace FFStudio
         public RectTransform tapToStart;
         public RectTransform tutorial_hand;
         public RectTransform tutorialObjects;
+        public GameObject levelProgress;
 
     [ Title( "Fired Events" ) ]
         public GameEvent event_level_started;
@@ -110,6 +111,8 @@ namespace FFStudio
 
 			// Tween tween = null;
 
+			levelProgress.SetActive( false );
+
 			level_information_text.text = "\n\n Tap to Continue";
 
 			sequence.Append( foreGroundImage.DOFade( 0.5f, GameSettings.Instance.ui_Entity_Fade_TweenDuration ) )
@@ -173,8 +176,9 @@ namespace FFStudio
 			var sequence = DOTween.Sequence();
 
 			sequence.Append( foreGroundImage.DOFade( 1f, GameSettings.Instance.ui_Entity_Fade_TweenDuration ) )
-			        .Join( level_information_text_Scale.DoScale_Target( Vector3.zero, GameSettings.Instance.ui_Entity_Scale_TweenDuration ) )
-                    .Join( ui_level_completed.GoToStartPosition() )
+					.Join( level_information_text_Scale.DoScale_Target( Vector3.zero, GameSettings.Instance.ui_Entity_Scale_TweenDuration ) )
+					.Join( ui_level_completed.GoToStartPosition() )
+					.AppendCallback( () => levelProgress.SetActive( true ) )
 			        .AppendCallback( loadNewLevelEvent.Raise );
 		}
 
