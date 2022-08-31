@@ -83,6 +83,7 @@ namespace FFStudio
     
     [ Title( "Camera" ) ]
         [ LabelText( "Follow Speed" ) ] public float camera_follow_speed;
+        [ LabelText( "Follow Speed End Level" ) ] public float camera_follow_speed_endLevel;
         [ LabelText( "Follow Offset Start" ) ] public Vector3 camera_follow_offset_start;
         [ LabelText( "Follow Offset End" ) ] public Vector3 camera_follow_offset_end;
     

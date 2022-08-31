@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a385bd3b4416492409284c9a366cb52a, type: 3}
   m_Name: game_settings
   m_EditorClassIdentifier: 
-  player_movement_speed_forward: 2.5
+  player_movement_speed_forward: 6
   player_movement_speed_lateral: 0.1
   player_movement_clamp_lateral: 2.2
   player_offset_upper_body: 0.788
@@ -64,6 +64,7 @@ MonoBehaviour:
   spring_punch_vertical_tight_ease: 25
   spring_punch_vertical_tight_smallest_ratio: 0.25
   camera_follow_speed: 1
+  camera_follow_speed_endLevel: 3
   camera_follow_offset_start: {x: 0, y: 3, z: -6}
   camera_follow_offset_end: {x: 0, y: 5, z: -10}
   maxLevelCount: 10
