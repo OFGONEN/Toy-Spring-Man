@@ -17,6 +17,7 @@ public class Spring : MonoBehaviour
 	[ SerializeField ] SharedFloat shared_player_position_delayed;
 	[ SerializeField ] SharedReferenceNotifier notif_player_transform;
 	[ SerializeField ] PoolSpring pool_spring;
+	[ SerializeField ] Pool_UIPopUpText pool_ui_popUpText;
 
   [ Title( "Fired Events" ) ]
 	[ SerializeField ] IntGameEvent event_player_length_lost;
@@ -83,6 +84,9 @@ public class Spring : MonoBehaviour
 		OnUpdate();
 		OnColorChange( color );
 		OnPlayerWidhtChange( 0 );
+
+		pool_ui_popUpText.GetEntity().Spawn( transform.position + Vector3.right * GameSettings.Instance.spring_ui_popUp_offset,
+		"+1", 2, Color.white, player_transform );
 
 		transform.localScale = Vector3.one.SetX( GameSettings.Instance.spring_spawn_punch ).SetY( GameSettings.Instance.spring_spawn_punch );
 		transform.DOScaleX( 1, GameSettings.Instance.spring_spawn_punch_duration );

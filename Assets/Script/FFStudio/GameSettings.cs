@@ -43,6 +43,7 @@ namespace FFStudio
         [ LabelText( "Spring Drop Force" ) ] public float spring_drop_force;
         [ LabelText( "Spring Drop Torque" ) ] public float spring_drop_torque;
         [ LabelText( "Spring Drop Duration" ) ] public float spring_drop_duration;
+        [ LabelText( "Spring PopUp Text" ) ] public float spring_ui_popUp_offset;
 
     [ Title( "Spring Low Count" ) ]
         [ LabelText( "Spring Horizontal Low Count" ) ] public int spring_horizontal_lowCount = 8;
