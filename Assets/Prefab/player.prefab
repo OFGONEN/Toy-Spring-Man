@@ -61,6 +61,7 @@ MonoBehaviour:
   shared_levelEnd_position: {fileID: 11400000, guid: 69b672e46721a45948e152f4cc6fc5e5, type: 2}
   shared_finalStage_position: {fileID: 11400000, guid: 3b9df61ae146d499ba580e25cb9560d7, type: 2}
   shared_player_position_delayed: {fileID: 11400000, guid: f2e34696369b44f73baeedf71cc4a44b, type: 2}
+  notif_level_progress: {fileID: 11400000, guid: 43438d720c16f2e4aa5a19d520e1e15f, type: 2}
   pool_spring: {fileID: 11400000, guid: aa95d39e4dfb843b883ebe99acc1bd13, type: 2}
   body_upper_transform: {fileID: 3167963565454959072}
   tightSpring_upper_renderer: {fileID: 6025800068322493748}

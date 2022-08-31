@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     [ SerializeField ] SharedVector3 shared_levelEnd_position;
     [ SerializeField ] SharedVector3 shared_finalStage_position;
     [ SerializeField ] SharedFloat shared_player_position_delayed;
+    [ SerializeField ] SharedFloatNotifier notif_level_progress;
 	[ SerializeField ] PoolSpring pool_spring;
 
   [ Title( "Components" ) ]
@@ -188,6 +189,7 @@ public class Player : MonoBehaviour
 		MoveForward();
 		SetUpperBodyPosition();
 		SetPlayerDelayedPosition();
+		CalculateLevelProgress();
 
 		// if( is_finger_down && shared_spring_value.CanTighten && spring_list.Count > 0 )
 		// shared_spring_value.DoTighten();
@@ -235,6 +237,7 @@ public class Player : MonoBehaviour
 	{
 		SetUpperBodyPosition();
 		SetPlayerDelayedPosition();
+		CalculateLevelProgress();
 	}
 
 	void OnUpdateFinalStage()
@@ -242,6 +245,11 @@ public class Player : MonoBehaviour
 		SetUpperBodyPosition();
 		SetPlayerDelayedPosition();
 		onFinalStage();
+	}
+
+	void CalculateLevelProgress()
+	{
+		notif_level_progress.SharedValue = Mathf.InverseLerp( 0, shared_finalStage_position.sharedValue.z, transform.position.z );
 	}
 	
 	void RemoveWidthAtFinalStage()
