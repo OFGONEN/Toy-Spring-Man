@@ -36,11 +36,27 @@ public class LevelCreator : ScriptableObject
     [ SerializeField ] CollectableData data_collectable; 
     // [ SerializeField ] FinalStageData data_finalStage;
 
+	List< GameObject > collectables_created = new List< GameObject >(32);
+
+	[ Button() ]
+	public void DeleteCreatedCollectables()
+	{
+		EditorSceneManager.MarkAllScenesDirty();
+
+		for( var i = 0; i < collectables_created.Count; i++ )
+		{
+			GameObject.DestroyImmediate( collectables_created[ i ] );
+		}
+
+		AssetDatabase.SaveAssets();
+	}
 	[ Button() ]
 	public void PlaceCollectableLine()
 	{
 		EditorSceneManager.MarkAllScenesDirty();
 		var collectableParent = GameObject.Find( "collectables" ).transform;
+
+		collectables_created.Clear();
 
 		for( var i = 0; i < collectable_count; i++ )
 		{
@@ -48,6 +64,8 @@ public class LevelCreator : ScriptableObject
 
 			collectable.SetParent( collectableParent );
 			collectable.position = collectable_origin.position + Vector3.forward * i * collectable_offset;
+
+			collectables_created.Add( collectable.gameObject );
 		}
 
 	    AssetDatabase.SaveAssets();
@@ -59,6 +77,8 @@ public class LevelCreator : ScriptableObject
 		EditorSceneManager.MarkAllScenesDirty();
 		var collectableParent = GameObject.Find( "collectables" ).transform;
 
+		collectables_created.Clear();
+
 		for( var i = 0; i < collectable_count; i++ )
 		{
 			var collectable = data_collectable.ReturnCollectable( collectable_type ).transform;
@@ -67,6 +87,7 @@ public class LevelCreator : ScriptableObject
 			collectable.position = collectable_origin.position + 
 				Vector3.forward * i * collectable_offset +
 				Vector3.right * sign * i * offset;
+			collectables_created.Add( collectable.gameObject );
 		}
 
 		AssetDatabase.SaveAssets();
@@ -78,11 +99,15 @@ public class LevelCreator : ScriptableObject
 		EditorSceneManager.MarkAllScenesDirty();
 		var collectableParent = GameObject.Find( "collectables" ).transform;
 
+		collectables_created.Clear();
+
 		var collectable = data_collectable.ReturnCollectable( collectable_type ).transform;
 			collectable.SetParent( collectableParent );
 			collectable.position = collectable_origin.position;
 
-	    AssetDatabase.SaveAssets();
+		collectables_created.Add( collectable.gameObject );
+
+		AssetDatabase.SaveAssets();
 	}
 
     [ Button() ]
