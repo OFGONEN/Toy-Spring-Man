@@ -149,8 +149,12 @@ public class LevelCreator : ScriptableObject
 
 			collectables_created.Add( collectable.gameObject );
 		}
+		
+		collectableParent.DestoryAllChildren();
 
-		// collectableParent.DestoryAllChildren();
+		for( var i = 0; i < collectables_created.Count; i++ )
+			collectables_created[ i ].transform.SetParent( collectableParent );
+
 		AssetDatabase.SaveAssets();
 	}
 
