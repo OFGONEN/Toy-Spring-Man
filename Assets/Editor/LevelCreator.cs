@@ -14,8 +14,14 @@ using Sirenix.OdinInspector;
 [ CreateAssetMenu( fileName = "tool_level_creator", menuName = "FFEditor/Tool/Level Creator" ) ]
 public class LevelCreator : ScriptableObject
 {
-  [ Title( "Setup" ) ]
+  [ Title( "Setup Ground" ) ]
     [ SerializeField ] int ground_count;
+
+  [ Title( "Setup Collectable" ) ]
+    [ SerializeField ] Transform collectable_origin;
+    [ SerializeField ] int collectable_count;
+    [ SerializeField ] float collectable_offset;
+    [ SerializeField ] CollectableType collectable_type;
 
   [ Title( "Setup - Final Stage" ) ]
     [ SerializeField ] Transform finalStage_transform;
@@ -27,7 +33,130 @@ public class LevelCreator : ScriptableObject
     [ SerializeField ] FinishLineData data_finishLine;
     [ SerializeField ] GroundData data_ground;
     [ SerializeField ] StepPlatformData data_stepPlatform; 
+    [ SerializeField ] CollectableData data_collectable; 
     // [ SerializeField ] FinalStageData data_finalStage;
+
+	List< GameObject > collectables_created = new List< GameObject >(32);
+
+	[ Button() ]
+	public void DeleteCreatedCollectables()
+	{
+		EditorSceneManager.MarkAllScenesDirty();
+
+		for( var i = 0; i < collectables_created.Count; i++ )
+		{
+			GameObject.DestroyImmediate( collectables_created[ i ] );
+		}
+
+		AssetDatabase.SaveAssets();
+	}
+	[ Button() ]
+	public void PlaceCollectableLine()
+	{
+		EditorSceneManager.MarkAllScenesDirty();
+		var collectableParent = GameObject.Find( "collectables" ).transform;
+
+		collectables_created.Clear();
+
+		for( var i = 0; i < collectable_count; i++ )
+		{
+			var collectable = data_collectable.ReturnCollectable( collectable_type ).transform;
+
+			collectable.SetParent( collectableParent );
+			collectable.position = collectable_origin.position + Vector3.forward * i * collectable_offset;
+
+			collectables_created.Add( collectable.gameObject );
+		}
+
+	    AssetDatabase.SaveAssets();
+	}
+
+	[ Button() ]
+	public void PlaceCollectableHorizontal()
+	{
+		EditorSceneManager.MarkAllScenesDirty();
+		var collectableParent = GameObject.Find( "collectables" ).transform;
+
+		collectables_created.Clear();
+
+		for( var i = 0; i < collectable_count; i++ )
+		{
+			var collectable = data_collectable.ReturnCollectable( collectable_type ).transform;
+
+			collectable.SetParent( collectableParent );
+			collectable.position = collectable_origin.position + Vector3.right * i * collectable_offset;
+
+			collectables_created.Add( collectable.gameObject );
+		}
+
+	    AssetDatabase.SaveAssets();
+	}
+
+	[ Button() ]
+	public void PlaceCollectableDiagonal( float sign, float offset )
+	{
+		EditorSceneManager.MarkAllScenesDirty();
+		var collectableParent = GameObject.Find( "collectables" ).transform;
+
+		collectables_created.Clear();
+
+		for( var i = 0; i < collectable_count; i++ )
+		{
+			var collectable = data_collectable.ReturnCollectable( collectable_type ).transform;
+
+			collectable.SetParent( collectableParent );
+			collectable.position = collectable_origin.position + 
+				Vector3.forward * i * collectable_offset +
+				Vector3.right * sign * i * offset;
+			collectables_created.Add( collectable.gameObject );
+		}
+
+		AssetDatabase.SaveAssets();
+	}
+
+	[ Button() ]
+	public void PlaceCollectable()
+	{
+		EditorSceneManager.MarkAllScenesDirty();
+		var collectableParent = GameObject.Find( "collectables" ).transform;
+
+		collectables_created.Clear();
+
+		var collectable = data_collectable.ReturnCollectable( collectable_type ).transform;
+			collectable.SetParent( collectableParent );
+			collectable.position = collectable_origin.position;
+
+		collectables_created.Add( collectable.gameObject );
+
+		AssetDatabase.SaveAssets();
+	}
+
+	[ Button() ]
+	public void MirrorTheLevel()
+	{
+		EditorSceneManager.MarkAllScenesDirty();
+		var collectableParent = GameObject.Find( "collectables" ).transform;
+		collectables_created.Clear();
+
+		for( var i = 0; i < collectableParent.childCount; i++ )
+		{
+			var childCollectable = collectableParent.GetChild( i );
+			CollectableType childType = ReturnCollectableType( childCollectable.name );
+			var newType = ( ( int )childType + 1 ) % 3;
+
+			var collectable = data_collectable.ReturnCollectable( ( CollectableType )newType ).transform;
+			collectable.position = childCollectable.position.SetX( childCollectable.position.x * -1f );
+
+			collectables_created.Add( collectable.gameObject );
+		}
+		
+		collectableParent.DestoryAllChildren();
+
+		for( var i = 0; i < collectables_created.Count; i++ )
+			collectables_created[ i ].transform.SetParent( collectableParent );
+
+		AssetDatabase.SaveAssets();
+	}
 
     [ Button() ]
     public void CreateEnvironment()
@@ -92,6 +221,18 @@ public class LevelCreator : ScriptableObject
 	    AssetDatabase.SaveAssets();
 	}
 
+	private CollectableType ReturnCollectableType( string name )
+	{
+		if( name.Contains( "collectable_blue" ) )
+			return CollectableType.Blue;
+		else if( name.Contains( "collectable_green" ) )
+			return CollectableType.Green;
+		else if( name.Contains( "collectable_orange" ) )
+			return CollectableType.Orange;
+		else
+			return CollectableType.Orange;
+	}
+
 #if UNITY_EDITOR
 	private void OnValidate()
 	{
@@ -128,4 +269,22 @@ public struct StepPlatformData
 	public GameObject stepPlatform_object;
     public float stepPlatform_offset;
     public float stepPlatform_rotate;
+}
+
+[Serializable]
+public struct CollectableData
+{
+	[ SerializeField ] GameObject[] collectable_object_array;
+
+	public GameObject ReturnCollectable( CollectableType type )
+	{
+		return PrefabUtility.InstantiatePrefab( collectable_object_array[ ( int )type ] ) as GameObject;
+	}
+}
+
+public enum CollectableType
+{
+	Blue,
+	Green,
+	Orange
 }
