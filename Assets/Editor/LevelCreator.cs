@@ -20,6 +20,7 @@ public class LevelCreator : ScriptableObject
   [ Title( "Setup Collectable" ) ]
     [ SerializeField ] Transform collectable_origin;
     [ SerializeField ] int collectable_count;
+    [ SerializeField ] float collectable_offset;
     [ SerializeField ] CollectableType collectable_type;
 
   [ Title( "Setup - Final Stage" ) ]
@@ -46,7 +47,7 @@ public class LevelCreator : ScriptableObject
 			var collectable = data_collectable.ReturnCollectable( collectable_type ).transform;
 
 			collectable.SetParent( collectableParent );
-			collectable.position = collectable_origin.position + Vector3.forward * i * data_collectable.collectable_offset;
+			collectable.position = collectable_origin.position + Vector3.forward * i * collectable_offset;
 		}
 
 	    AssetDatabase.SaveAssets();
@@ -64,7 +65,7 @@ public class LevelCreator : ScriptableObject
 
 			collectable.SetParent( collectableParent );
 			collectable.position = collectable_origin.position + 
-				Vector3.forward * i * data_collectable.collectable_offset +
+				Vector3.forward * i * collectable_offset +
 				Vector3.right * sign * i * offset;
 		}
 
@@ -189,7 +190,6 @@ public struct StepPlatformData
 public struct CollectableData
 {
 	[ SerializeField ] GameObject[] collectable_object_array;
-	public float collectable_offset;
 
 	public GameObject ReturnCollectable( CollectableType type )
 	{
