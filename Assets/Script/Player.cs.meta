@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 7323d6d8e4e204daaba8bab088ee8def
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - shared_player_color: {fileID: 11400000, guid: 18f5b34fea0e0435ab7cbda0feace9eb, type: 2}
+  - shared_player_length: {fileID: 11400000, guid: e68282049a1ff45f4a5d221dccb275c2, type: 2}
+  - shared_input_drag: {fileID: 11400000, guid: dd0ce7520e7fd492d976b3049d44fc51, type: 2}
+  - shared_levelEnd_position: {fileID: 11400000, guid: 69b672e46721a45948e152f4cc6fc5e5, type: 2}
+  - pool_spring: {fileID: 11400000, guid: aa95d39e4dfb843b883ebe99acc1bd13, type: 2}
+  - tightSpring_upper_renderer: {instanceID: 0}
+  - tightSpring_bottom_renderer: {instanceID: 0}
+  - body_upper_animator: {instanceID: 0}
+  - body_bottom_animator: {instanceID: 0}
+  - body_upper_colorSetter: {instanceID: 0}
+  - body_bottom_colorSetter: {instanceID: 0}
+  executionOrder: 300
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

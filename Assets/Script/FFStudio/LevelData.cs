@@ -15,6 +15,9 @@ namespace FFStudio
 		[ ValueDropdown( "SceneList" ), LabelText( "Scene Index" ) ] public int scene_index;
         [ LabelText( "Override As Active Scene" ) ] public bool scene_overrideAsActiveScene;
 
+	[ Title( "Level Data" ) ]
+		[ LabelText( "Player Start Color" ) ] public ColorData player_color_data;
+
 #if UNITY_EDITOR
 		static IEnumerable SceneList()
         {

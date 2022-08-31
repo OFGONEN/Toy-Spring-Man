@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 256856ab7b19d44a4b4efc31ea53731c, type: 3}
+  m_Name: tool_level_creator
+  m_EditorClassIdentifier: 
+  ground_count: 12
+  collectable_origin: {fileID: 0}
+  collectable_count: 3
+  collectable_type: 0
+  finalStage_transform: {fileID: 0}
+  finalStage_step_count: 45
+  finalStage_color:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.6392157, b: 0, a: 1}
+  - {r: 1, g: 1, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 0, g: 1, b: 1, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 1, a: 1}
+  data_finalStage:
+    finalStage_object: {fileID: 8415057627306428255, guid: f3b8b589847964c178a4ea6174bf4348, type: 3}
+    finalStage_offset: 2
+  data_finishLine:
+    finishLine_object: {fileID: 7169710899169753449, guid: 426a339171d9b42d182b61f9041bbc8f, type: 3}
+    finishLine_offset: 5
+  data_ground:
+    ground_object: {fileID: 6890220854897602685, guid: eb32c38b815aa204a9bc7af75dd27582, type: 3}
+    ground_length: 5
+  data_stepPlatform:
+    stepPlatform_object: {fileID: 1663030153436053844, guid: ce78446cd127b4773964735622ed7fc9, type: 3}
+    stepPlatform_offset: 2
+    stepPlatform_rotate: 45
+  data_collectable:
+    collectable_object_array:
+    - {fileID: 6111693921468295371, guid: 9a1af36ffc2154433b42f2a4a3af51bf, type: 3}
+    - {fileID: 6111693921468295371, guid: d2dd2dbbd55104207847902ce093c148, type: 3}
+    - {fileID: 6111693921468295371, guid: 49c9fd0bf08324d30b162964c7b3c979, type: 3}
+    collectable_offset: 1
