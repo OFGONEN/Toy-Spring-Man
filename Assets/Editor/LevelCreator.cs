@@ -72,6 +72,27 @@ public class LevelCreator : ScriptableObject
 	}
 
 	[ Button() ]
+	public void PlaceCollectableHorizontal()
+	{
+		EditorSceneManager.MarkAllScenesDirty();
+		var collectableParent = GameObject.Find( "collectables" ).transform;
+
+		collectables_created.Clear();
+
+		for( var i = 0; i < collectable_count; i++ )
+		{
+			var collectable = data_collectable.ReturnCollectable( collectable_type ).transform;
+
+			collectable.SetParent( collectableParent );
+			collectable.position = collectable_origin.position + Vector3.right * i * collectable_offset;
+
+			collectables_created.Add( collectable.gameObject );
+		}
+
+	    AssetDatabase.SaveAssets();
+	}
+
+	[ Button() ]
 	public void PlaceCollectableDiagonal( float sign, float offset )
 	{
 		EditorSceneManager.MarkAllScenesDirty();
