@@ -329,6 +329,12 @@ public class Player : MonoBehaviour
 		body_upper_animator.SetTrigger( "victory" );
 		body_bottom_animator.SetTrigger( "victory" );
 
+		for( var i = 0; i < shared_player_length.sharedValue; i++ )
+			LooseSpring( 0 );
+
+		tightSpring_upper_renderer.enabled  = false;
+		tightSpring_bottom_renderer.enabled = false;
+
 		onFinalStage = ExtensionMethods.EmptyMethod;
 
 		event_level_complete.Raise();
