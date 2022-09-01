@@ -33,7 +33,8 @@ public class Spring : MonoBehaviour
 	[ ShowInInspector, ReadOnly ] int spring_index;
 	Transform player_transform;
 
-	RecycledTween recycledTween = new RecycledTween();
+	RecycledSequence recycledSequence = new RecycledSequence();
+	RecycledTween    recycledTween    = new RecycledTween();
 
 	// Delegates
 	UnityMessage onUpdateMethod;
@@ -89,8 +90,11 @@ public class Spring : MonoBehaviour
 		"+1", 2, Color.white, player_transform );
 
 		transform.localScale = Vector3.one.SetX( GameSettings.Instance.spring_spawn_punch ).SetY( GameSettings.Instance.spring_spawn_punch );
-		transform.DOScaleX( 1, GameSettings.Instance.spring_spawn_punch_duration );
-		transform.DOScaleZ( 1, GameSettings.Instance.spring_spawn_punch_duration );
+
+		var sequence = recycledSequence.Recycle( OnSpawnScaleDone );
+
+		sequence.Append( transform.DOScaleX( 1, GameSettings.Instance.spring_spawn_punch_duration ) );
+		sequence.Join( transform.DOScaleZ( 1, GameSettings.Instance.spring_spawn_punch_duration ) );
 
 		onUpdateMethod = OnUpdate;
 
@@ -139,6 +143,11 @@ public class Spring : MonoBehaviour
 #endregion
 
 #region Implementation
+	void OnSpawnScaleDone()
+	{
+		transform.localScale = transform.localScale.SetX( 1 ).SetZ( 1 );
+	}
+
 	void OnDropDone()
 	{
 		_rigidbody.velocity    = Vector3.zero;
