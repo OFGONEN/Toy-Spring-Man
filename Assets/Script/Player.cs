@@ -332,6 +332,8 @@ public class Player : MonoBehaviour
 		for( var i = 0; i < shared_player_length.sharedValue; i++ )
 			LooseSpring( 0 );
 
+		spring_list.Clear();
+
 		tightSpring_upper_renderer.enabled  = false;
 		tightSpring_bottom_renderer.enabled = false;
 
