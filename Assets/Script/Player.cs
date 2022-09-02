@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
 	List< Spring > spring_list = new List< Spring >( 32 );
 	[ ShowInInspector, ReadOnly ] bool is_finger_down; 
 	float finalStage_width_loss_speed;
+	float finalStage_length_loss_speed;
 	float finalStage_index_duration;
 	float finalStage_length_loss_cooldown;
 
@@ -268,7 +269,7 @@ public class Player : MonoBehaviour
 		if( shared_player_length.sharedValue > 0 && Time.time >= finalStage_length_loss_cooldown )
 		{
 			LooseSpring( Random.Range( 0, shared_player_length.sharedValue ) );
-			finalStage_length_loss_cooldown = Time.time + finalStage_index_duration;
+			finalStage_length_loss_cooldown = Time.time + finalStage_length_loss_speed;
 		}
 	}
 
@@ -296,6 +297,8 @@ public class Player : MonoBehaviour
 		if( width % GameSettings.Instance.player_jump_loss_width > 0 )
 			jumpIndex += 1;
 
+		var widthJumpIndex = jumpIndex;
+
 		jumpIndex = Mathf.Min( jumpIndex + shared_player_length.sharedValue, GameSettings.Instance.player_jump_index_max );
 
 		float ratio = Mathf.InverseLerp( GameSettings.Instance.player_jump_index_min, 
@@ -315,6 +318,7 @@ public class Player : MonoBehaviour
 		finalStage_index_duration = duration / jumpIndex;
 
 		finalStage_width_loss_speed = GameSettings.Instance.player_jump_loss_width / finalStage_index_duration;
+		finalStage_length_loss_speed = ( duration - widthJumpIndex * finalStage_index_duration ) / shared_player_length.sharedValue;
 
 		onUpdateMethod = OnUpdateFinalStage;
 
