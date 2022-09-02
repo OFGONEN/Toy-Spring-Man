@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61198e6828a514a48bae9a72a0a00daa, type: 3}
   m_Name: data_color_green
   m_EditorClassIdentifier: 
-  data_color_body: {r: 0, g: 1, b: 0, a: 1}
-  data_color_spring_looping: {r: 0, g: 1, b: 0, a: 1}
-  data_color_spring_tight: {r: 0, g: 1, b: 0, a: 1}
-  data_color_gate_width: {r: 0, g: 1, b: 0, a: 1}
+  data_color_body: {r: 0.21601488, g: 0.5566038, b: 0.013502503, a: 1}
+  data_color_spring_looping: {r: 0.27450982, g: 0.7058824, b: 0.015686275, a: 1}
+  data_color_spring_tight: {r: 0.21568629, g: 0.5568628, b: 0.011764707, a: 1}
+  data_color_gate_width: {r: 0.27450982, g: 0.7058824, b: 0.015686275, a: 1}
   data_id: 1
