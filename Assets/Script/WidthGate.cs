@@ -31,7 +31,7 @@ public class WidthGate : MonoBehaviour
 	private void Start()
 	{
 		if( data_positive )
-			ChangeColor( CurrentLevelData.Instance.levelData.player_color_data.Color );
+			ChangeColor( CurrentLevelData.Instance.levelData.player_color_data.ColorGateWidth );
 	}
 #endregion
 
@@ -51,7 +51,7 @@ public class WidthGate : MonoBehaviour
 
     public void OnPlayerColorChange( ColorData colorData )
     {
-		ChangeColor( colorData.Color );
+		ChangeColor( colorData.ColorGateWidth );
 	}
 #endregion
 

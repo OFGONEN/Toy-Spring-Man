@@ -124,12 +124,12 @@ public class Player : MonoBehaviour
 	public void OnPlayerColorChange()
 	{
 		foreach( var spring in spring_list )
-			spring.OnColorChange( shared_player_color.Color );
+			spring.OnColorChange( shared_player_color.ColorSpringLooping );
 
-		body_upper_colorSetter.SetColor( shared_player_color.Color );
-		body_bottom_colorSetter.SetColor( shared_player_color.Color );
-		tightSpring_upper_colorSetter.SetColor( shared_player_color.Color );
-		tightSpring_bottom_colorSetter.SetColor( shared_player_color.Color );
+		body_upper_colorSetter.SetColor( shared_player_color.ColorBody );
+		body_bottom_colorSetter.SetColor( shared_player_color.ColorBody );
+		tightSpring_upper_colorSetter.SetColor( shared_player_color.ColorSpringTight );
+		tightSpring_bottom_colorSetter.SetColor( shared_player_color.ColorSpringTight );
 	}
 
 	public void OnPlayerLength_Gained( IntGameEvent gameEvent )
@@ -143,7 +143,7 @@ public class Player : MonoBehaviour
 
 			Vector3 spawnPosition = spring_list.Count > 0 ? spring_list[ spring_list.Count - 1 ].AttachPoint() : transform.position;
 
-			spring.Spawn( spring_list.Count, spawnPosition, shared_player_color.Color );
+			spring.Spawn( spring_list.Count, spawnPosition, shared_player_color.ColorSpringLooping );
 			spring_list.Add( spring );
 		}
 
