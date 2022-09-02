@@ -11,7 +11,7 @@ public class WidthGate : MonoBehaviour
 {
 #region Fields
   [ Title( "Setup" ) ]
-    [ LabelText( "Width" ), SerializeField ] GameObject gate_pair;
+    [ LabelText( "Gate Pair" ), SerializeField ] GameObject gate_pair;
     [ LabelText( "Width" ), SerializeField ] float data_width;
     [ LabelText( "Is Positive" ), SerializeField ] bool data_positive;
 
