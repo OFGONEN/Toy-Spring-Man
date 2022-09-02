@@ -1293,6 +1293,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: obstacle_width_short_2
       objectReference: {fileID: 0}
+    - target: {fileID: 2271426591095549773, guid: 2aa6f6a9afe199c43b23af4afc7cce83, type: 3}
+      propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
+      value: 400
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2aa6f6a9afe199c43b23af4afc7cce83, type: 3}
 --- !u!1001 &228645317
@@ -7777,6 +7781,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: obstacle_width_short
       objectReference: {fileID: 0}
+    - target: {fileID: 2271426591095549773, guid: 2aa6f6a9afe199c43b23af4afc7cce83, type: 3}
+      propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
+      value: 250
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2aa6f6a9afe199c43b23af4afc7cce83, type: 3}
 --- !u!1001 &1823315848
@@ -8081,6 +8089,10 @@ PrefabInstance:
     - target: {fileID: 1764510148973545074, guid: 2aa6f6a9afe199c43b23af4afc7cce83, type: 3}
       propertyPath: m_Name
       value: obstacle_width_short_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2271426591095549773, guid: 2aa6f6a9afe199c43b23af4afc7cce83, type: 3}
+      propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2aa6f6a9afe199c43b23af4afc7cce83, type: 3}
