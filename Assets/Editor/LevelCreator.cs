@@ -167,9 +167,14 @@ public class LevelCreator : ScriptableObject
 		EditorSceneManager.MarkAllScenesDirty();
 		environmentParent.DestoryAllChildren();
 
+		var ground_back = PrefabUtility.InstantiatePrefab( data_ground.ground_object ) as GameObject;
+		ground_back.name = "ground_back";
+		ground_back.transform.SetParent( environmentParent );
+		ground_back.transform.localPosition = Vector3.forward * -1 * data_ground.ground_length;
+
 		int i;
 		for( i = 0; i < ground_count - 1; i++ )
-        {
+		{
 			var ground = PrefabUtility.InstantiatePrefab( data_ground.ground_object ) as GameObject;
 			ground.name = "ground_" + ( i + 1 );
 			ground.transform.SetParent( environmentParent );
