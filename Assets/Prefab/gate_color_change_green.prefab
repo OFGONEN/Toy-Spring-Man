@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 448374, guid: 648a454b0bdfd8c47a5cf48e1f8a3736, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 448374, guid: 648a454b0bdfd8c47a5cf48e1f8a3736, type: 3}
       propertyPath: m_LocalScale.x
@@ -189,6 +189,10 @@ PrefabInstance:
       propertyPath: data_color
       value: 
       objectReference: {fileID: 11400000, guid: e9622337a795e454eafa78b6e46786c7, type: 2}
+    - target: {fileID: 4968128215276777244, guid: ec09e22f85c9440e8ae92c7f1c0edbcf, type: 3}
+      propertyPath: _particleSystem
+      value: 
+      objectReference: {fileID: 8618842501426417961}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec09e22f85c9440e8ae92c7f1c0edbcf, type: 3}
 --- !u!4 &8901547091637911153 stripped
@@ -257,6 +261,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dff0fd5524b08754e9e2b68478c827b3, type: 3}
+--- !u!198 &8618842501426417961 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19852780, guid: dff0fd5524b08754e9e2b68478c827b3, type: 3}
+  m_PrefabInstance: {fileID: 8618842501444369605}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8618842501444795537 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 426068, guid: dff0fd5524b08754e9e2b68478c827b3, type: 3}

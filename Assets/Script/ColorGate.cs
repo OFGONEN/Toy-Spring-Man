@@ -12,6 +12,7 @@ public class ColorGate : MonoBehaviour
   [ Title( "Setup" ) ]
     [ SerializeField ] ColorData data_color; 
     [ SerializeField ] ColorData data_color_player; 
+    [ SerializeField ] ParticleSystem _particleSystem; 
 #endregion
 
 #region Properties
@@ -24,6 +25,7 @@ public class ColorGate : MonoBehaviour
     public void OnTrigger()
     {
 		data_color_player.ChangeData( data_color );
+		_particleSystem.Stop( true, ParticleSystemStopBehavior.StopEmitting );
 	}
 #endregion
 

@@ -66,8 +66,8 @@ MonoBehaviour:
   spring_punch_vertical_tight_smallest_ratio: 0.25
   camera_follow_speed: 2
   camera_follow_speed_endLevel: 3
-  camera_follow_offset_start: {x: 0, y: 3, z: -6}
-  camera_follow_offset_end: {x: 0, y: 5, z: -10}
+  camera_follow_offset_start: {x: 0, y: 3.4, z: -3}
+  camera_follow_offset_end: {x: 0, y: 5.5, z: -6}
   maxLevelCount: 10
   useRemoteConfig_GameSettings: 0
   useRemoteConfig_Components: 0
