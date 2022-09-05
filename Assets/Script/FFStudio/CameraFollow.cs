@@ -13,6 +13,7 @@ namespace FFStudio
         [ SerializeField ] SharedFloat shared_camera_offset_ratio;
 
         Transform target_transform;
+        float camera_speed;
 // Delegate
         UnityMessage onUpdateMethod;
 #endregion
@@ -33,8 +34,15 @@ namespace FFStudio
 #endregion
 
 #region API
+        public void OnLevelEnd()
+        {
+			camera_speed = GameSettings.Instance.camera_follow_speed_endLevel;
+		}
+
         public void OnLevelStart()
         {
+			camera_speed = GameSettings.Instance.camera_follow_speed;
+
 			target_transform = notif_player_transform.sharedValue as Transform;
 			onUpdateMethod   = FollowTarget;
 		}
@@ -52,7 +60,7 @@ namespace FFStudio
 			var offset = Vector3.Lerp( GameSettings.Instance.camera_follow_offset_start, GameSettings.Instance.camera_follow_offset_end, shared_camera_offset_ratio.sharedValue );
 			var targetPosition = target_transform.position + offset;
 
-            transform.position = Vector3.Lerp( transform.position, targetPosition, GameSettings.Instance.camera_follow_speed * Time.deltaTime );
+            transform.position = Vector3.Lerp( transform.position, targetPosition, camera_speed * Time.deltaTime );
         }
 #endregion
 

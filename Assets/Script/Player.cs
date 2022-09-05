@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     [ SerializeField ] SharedVector3 shared_levelEnd_position;
     [ SerializeField ] SharedVector3 shared_finalStage_position;
     [ SerializeField ] SharedFloat shared_player_position_delayed;
+    [ SerializeField ] SharedFloatNotifier notif_level_progress;
 	[ SerializeField ] PoolSpring pool_spring;
 
   [ Title( "Components" ) ]
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour
 	List< Spring > spring_list = new List< Spring >( 32 );
 	[ ShowInInspector, ReadOnly ] bool is_finger_down; 
 	float finalStage_width_loss_speed;
+	float finalStage_length_loss_speed;
 	float finalStage_index_duration;
 	float finalStage_length_loss_cooldown;
 
@@ -123,12 +125,12 @@ public class Player : MonoBehaviour
 	public void OnPlayerColorChange()
 	{
 		foreach( var spring in spring_list )
-			spring.OnColorChange( shared_player_color.Color );
+			spring.OnColorChange( shared_player_color.ColorSpringLooping );
 
-		body_upper_colorSetter.SetColor( shared_player_color.Color );
-		body_bottom_colorSetter.SetColor( shared_player_color.Color );
-		tightSpring_upper_colorSetter.SetColor( shared_player_color.Color );
-		tightSpring_bottom_colorSetter.SetColor( shared_player_color.Color );
+		body_upper_colorSetter.SetColor( shared_player_color.ColorBody );
+		body_bottom_colorSetter.SetColor( shared_player_color.ColorBody );
+		tightSpring_upper_colorSetter.SetColor( shared_player_color.ColorSpringTight );
+		tightSpring_bottom_colorSetter.SetColor( shared_player_color.ColorSpringTight );
 	}
 
 	public void OnPlayerLength_Gained( IntGameEvent gameEvent )
@@ -142,7 +144,7 @@ public class Player : MonoBehaviour
 
 			Vector3 spawnPosition = spring_list.Count > 0 ? spring_list[ spring_list.Count - 1 ].AttachPoint() : transform.position;
 
-			spring.Spawn( spring_list.Count, spawnPosition, shared_player_color.Color );
+			spring.Spawn( spring_list.Count, spawnPosition, shared_player_color.ColorSpringLooping );
 			spring_list.Add( spring );
 		}
 
@@ -188,6 +190,7 @@ public class Player : MonoBehaviour
 		MoveForward();
 		SetUpperBodyPosition();
 		SetPlayerDelayedPosition();
+		CalculateLevelProgress();
 
 		// if( is_finger_down && shared_spring_value.CanTighten && spring_list.Count > 0 )
 		// shared_spring_value.DoTighten();
@@ -235,6 +238,7 @@ public class Player : MonoBehaviour
 	{
 		SetUpperBodyPosition();
 		SetPlayerDelayedPosition();
+		CalculateLevelProgress();
 	}
 
 	void OnUpdateFinalStage()
@@ -242,6 +246,11 @@ public class Player : MonoBehaviour
 		SetUpperBodyPosition();
 		SetPlayerDelayedPosition();
 		onFinalStage();
+	}
+
+	void CalculateLevelProgress()
+	{
+		notif_level_progress.SharedValue = Mathf.InverseLerp( 0, shared_finalStage_position.sharedValue.z, transform.position.z );
 	}
 	
 	void RemoveWidthAtFinalStage()
@@ -260,7 +269,7 @@ public class Player : MonoBehaviour
 		if( shared_player_length.sharedValue > 0 && Time.time >= finalStage_length_loss_cooldown )
 		{
 			LooseSpring( Random.Range( 0, shared_player_length.sharedValue ) );
-			finalStage_length_loss_cooldown = Time.time + finalStage_index_duration;
+			finalStage_length_loss_cooldown = Time.time + finalStage_length_loss_speed;
 		}
 	}
 
@@ -288,6 +297,8 @@ public class Player : MonoBehaviour
 		if( width % GameSettings.Instance.player_jump_loss_width > 0 )
 			jumpIndex += 1;
 
+		var widthJumpIndex = jumpIndex;
+
 		jumpIndex = Mathf.Min( jumpIndex + shared_player_length.sharedValue, GameSettings.Instance.player_jump_index_max );
 
 		float ratio = Mathf.InverseLerp( GameSettings.Instance.player_jump_index_min, 
@@ -307,6 +318,7 @@ public class Player : MonoBehaviour
 		finalStage_index_duration = duration / jumpIndex;
 
 		finalStage_width_loss_speed = GameSettings.Instance.player_jump_loss_width / finalStage_index_duration;
+		finalStage_length_loss_speed = ( duration - widthJumpIndex * finalStage_index_duration ) / shared_player_length.sharedValue;
 
 		onUpdateMethod = OnUpdateFinalStage;
 
@@ -320,6 +332,14 @@ public class Player : MonoBehaviour
 	{
 		body_upper_animator.SetTrigger( "victory" );
 		body_bottom_animator.SetTrigger( "victory" );
+
+		for( var i = 0; i < shared_player_length.sharedValue; i++ )
+			LooseSpring( 0 );
+
+		spring_list.Clear();
+
+		tightSpring_upper_renderer.enabled  = false;
+		tightSpring_bottom_renderer.enabled = false;
 
 		onFinalStage = ExtensionMethods.EmptyMethod;
 

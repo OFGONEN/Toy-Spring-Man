@@ -11,6 +11,7 @@ public class WidthGate : MonoBehaviour
 {
 #region Fields
   [ Title( "Setup" ) ]
+    [ LabelText( "Gate Pair" ), SerializeField ] GameObject gate_pair;
     [ LabelText( "Width" ), SerializeField ] float data_width;
     [ LabelText( "Is Positive" ), SerializeField ] bool data_positive;
 
@@ -30,7 +31,7 @@ public class WidthGate : MonoBehaviour
 	private void Start()
 	{
 		if( data_positive )
-			ChangeColor( CurrentLevelData.Instance.levelData.player_color_data.Color );
+			ChangeColor( CurrentLevelData.Instance.levelData.player_color_data.ColorGateWidth );
 	}
 #endregion
 
@@ -41,11 +42,16 @@ public class WidthGate : MonoBehaviour
 			property_player_width.Add( data_width );
         else
 			property_player_width.Substact( data_width );
+
+		gameObject.SetActive( false );
+
+		if( gate_pair )
+			gate_pair.SetActive( false );
 	}
 
     public void OnPlayerColorChange( ColorData colorData )
     {
-		ChangeColor( colorData.Color );
+		ChangeColor( colorData.ColorGateWidth );
 	}
 #endregion
 

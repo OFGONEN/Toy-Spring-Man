@@ -27,10 +27,11 @@ namespace FFStudio
 #endregion
 
 #region API
-		public void Spawn( Vector3 position, string text, float size, Color color )
+		public void Spawn( Vector3 position, string text, float size, Color color, Transform parent = null )
 		{
 			gameObject.SetActive( true );
 			transform.position = position;
+			transform.SetParent( parent );
 
 			ui_float.DoFloat( GameSettings.Instance.ui_PopUp_height,
 				GameSettings.Instance.ui_PopUp_duration );
