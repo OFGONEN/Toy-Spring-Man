@@ -489,6 +489,24 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventListener:
+      gameEvents:
+      - {fileID: 11400000, guid: 2d306dd8091f5e243bc64641800d1b9a, type: 2}
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3375690685179770155}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: OnPlayerLength_Gained
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 2d306dd8091f5e243bc64641800d1b9a, type: 2}
+            m_ObjectArgumentAssemblyTypeName: SpringGameEvent, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &506609683
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ public class Collectable : MonoBehaviour
   [ Title( "Shared Variable" ) ]
     [ SerializeField ] PlayerLength shared_player_length; 
     [ SerializeField ] ColorData data_color_player; 
+    [ SerializeField ] SpringGameEvent event_spring_gained; 
     [ SerializeField ] IntGameEvent event_player_length_gained; 
     [ SerializeField ] IntGameEvent event_player_length_lost; 
 #endregion
@@ -31,7 +32,8 @@ public class Collectable : MonoBehaviour
     {
         if( data_color.ColorID == data_color_player.ColorID )
 		{
-			event_player_length_gained.Raise( data_value );
+			// event_player_length_gained.Raise( data_value );
+			event_spring_gained.Raise( data_value, data_color );
 			gameObject.SetActive( false );
 		}
 		else if( shared_player_length.sharedValue > 0 )
