@@ -30,17 +30,19 @@ public class Collectable : MonoBehaviour
 #region API
     public void OnTrigger()
     {
-        if( data_color.ColorID == data_color_player.ColorID )
-		{
-			// event_player_length_gained.Raise( data_value );
-			event_spring_gained.Raise( data_value, data_color );
-			gameObject.SetActive( false );
-		}
-		else if( shared_player_length.sharedValue > 0 )
-		{
-			event_player_length_lost.Raise( 0 );
-			gameObject.SetActive( false );
-		}
+		event_spring_gained.Raise( data_value, data_color );
+		gameObject.SetActive( false );
+
+        // if( data_color.ColorID == data_color_player.ColorID )
+		// {
+		// 	event_player_length_gained.Raise( data_value );
+		// 	gameObject.SetActive( false );
+		// }
+		// else if( shared_player_length.sharedValue > 0 )
+		// {
+		// 	event_player_length_lost.Raise( 0 );
+		// 	gameObject.SetActive( false );
+		// }
 	}
 #endregion
 
